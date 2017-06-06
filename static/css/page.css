@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto|Ubuntu');
+
+body {
+	font-family: "Ubuntu";
+}
+
+
+.content {
+	width: 1024px;
+	margin: 0 auto;
+}
+
+
+pre {
+	background-color: #ddd;
+	color: #000;
+	padding-left: 1em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	font-family: 'Droid Sans Mono', monospace;
+	font-size: 12px;
+}
+
+figure {
+	display: inline;
+}
+
+img {
+	transition: -webkit-transform 0.25s ease;
+	transition: transform 0.25s ease;
+}
+
+img:active {
+	-webkit-transform: scale(2);
+	transform: scale(2);
+}

@@ -1,0 +1,8 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "\"Anything about Everything\""
+
+canonifyurls = true
+
+[params]
+  author = "Igor Mihalik" 
