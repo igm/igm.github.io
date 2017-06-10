@@ -1,6 +1,6 @@
 +++
 date = "2012-06-28"
-draft = true
+draft = false
 title = "BOSH on vSphere (micro Bosh)"
 
 +++

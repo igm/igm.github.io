@@ -1,6 +1,6 @@
 +++
 date = "2012-09-06"
-draft = true
+draft = false
 title = "go get..."
 
 +++
