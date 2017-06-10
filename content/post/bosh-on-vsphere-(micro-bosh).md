@@ -12,10 +12,10 @@ As an infrastructure I created a cluster of 4 hosts ESXi version 5u1 (esxi1, esx
 
 Proper network configuration is crucial for correct deployment. Bosh VMs run as guests in ESXi hosts and they access those hosts directly so both the hosts and guests have to  share the same network. This is also the case for vCenter Server.
 
-{{< figure src="/images/bosh-on-vsphere-(micro-bosh)/image001.png" width="400px" >}}
-{{< figure src="/images/bosh-on-vsphere-(micro-bosh)/image003.png" width="400px" >}} </br>
-{{< figure src="/images/bosh-on-vsphere-(micro-bosh)/image005.png" width="400px" >}}
-{{< figure src="/images/bosh-on-vsphere-(micro-bosh)/image007.png" width="450px" >}}
+<img src="/images/bosh-on-vsphere-(micro-bosh)/image001.png" width="400px" class="fancybox"/>
+<img src="/images/bosh-on-vsphere-(micro-bosh)/image003.png" width="400px" class="fancybox"/>
+<img src="/images/bosh-on-vsphere-(micro-bosh)/image005.png" width="400px" class="fancybox"/>
+<img src="/images/bosh-on-vsphere-(micro-bosh)/image007.png" width="450px" class="fancybox"/>
 
 <!-- <a href="http://1.bp.blogspot.com/-2karvJbVftY/T-x7jufBU_I/AAAAAAAAHXA/1hlRtfY-WzU/s1600/image001.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://1.bp.blogspot.com/-2karvJbVftY/T-x7jufBU_I/AAAAAAAAHXA/1hlRtfY-WzU/s400/image001.png" width="400" /></a>   <a href="http://4.bp.blogspot.com/-uobwxIfuGLs/T-x7nnthoKI/AAAAAAAAHXI/3Cc42WtR5ig/s1600/image003.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://4.bp.blogspot.com/-uobwxIfuGLs/T-x7nnthoKI/AAAAAAAAHXI/3Cc42WtR5ig/s400/image003.png" width="400" /></a>  <a href="http://4.bp.blogspot.com/-h0f5TNAUTf4/T-x7wp00aDI/AAAAAAAAHXY/leiMecqlMJA/s1600/image005.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://4.bp.blogspot.com/-h0f5TNAUTf4/T-x7wp00aDI/AAAAAAAAHXY/leiMecqlMJA/s400/image005.png" width="400" /></a>   <a href="http://1.bp.blogspot.com/-ZwTIKafeAKo/T-x7zTts_2I/AAAAAAAAHXg/33Lm4S3Sj34/s1600/image007.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://1.bp.blogspot.com/-ZwTIKafeAKo/T-x7zTts_2I/AAAAAAAAHXg/33Lm4S3Sj34/s400/image007.png" width="400" /></a>   -->
 
@@ -109,9 +109,15 @@ Deploy Micro BOSH
 Done             11/11 00:20:41                                                 
 Deployed `micro/micro_bosh.yml' to `micro', took 00:20:41 to complete
 </pre>
-Entire process takes several minutes (~20 minutes in my case).
-<a href="http://3.bp.blogspot.com/-VAxjYJDcyzk/T-x70ekugHI/AAAAAAAAHXo/2hYP8O62bCo/s1600/image009.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="198" src="http://3.bp.blogspot.com/-VAxjYJDcyzk/T-x70ekugHI/AAAAAAAAHXo/2hYP8O62bCo/s400/image009.png" width="400" /></a>  <a href="http://4.bp.blogspot.com/-dhcpu4Oof9E/T-x71Loaz8I/AAAAAAAAHXw/sobXCjj9nXc/s1600/image011.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://4.bp.blogspot.com/-dhcpu4Oof9E/T-x71Loaz8I/AAAAAAAAHXw/sobXCjj9nXc/s400/image011.png" width="400" /></a>  
-Now we can target the micro bosh and login with default admin/admin: 
+
+Entire process takes several minutes (~20 minutes in my case):
+
+<img src="/images/bosh-on-vsphere-(micro-bosh)/image009.png" width="400px" class="fancybox">
+
+Now we can target the micro bosh and login with default admin/admin:
+ 
+<img src="/images/bosh-on-vsphere-(micro-bosh)/image011.png" width="400px" class="fancybox"/>
+  
 <pre>$ bosh target 192.168.2.120:25555
 $ bosh status
 Updating director data... done

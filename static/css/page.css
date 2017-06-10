@@ -21,16 +21,15 @@ pre {
 	font-size: 12px;
 }
 
-figure {
-	display: inline;
-}
-
 img {
 	transition: -webkit-transform 0.25s ease;
 	transition: transform 0.25s ease;
+	margin-right: 30px;
+	margin-bottom: 20px;
 }
 
-img:active {
-	-webkit-transform: scale(2);
-	transform: scale(2);
-}
+
+/*img:active {*/
+	/*-webkit-transform: scale(2);*/
+	/*transform: scale(2);*/
+/*}*/
