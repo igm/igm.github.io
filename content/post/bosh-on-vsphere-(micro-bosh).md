@@ -4,7 +4,7 @@ draft = true
 title = "BOSH on vSphere (micro Bosh)"
 
 +++
-Recently I spent some time playing with BOSH which is a tool for <a href="https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md" target="_blank">release engineering, deployment and lifecycle management of large scale distributed services</a>. It is used to manage VMs in AWS and vSphere. The vSphere option seemed to be interesting to me and the idea of having private <a href="http://cloudfoundry.org/" target="_blank">Cloud Foundry</a> PaaS running locally on private infrastructure was exciting. The BOSH is under heavy development and it's sometimes difficult to make things work easily even if following various tutorials and <a href="http://drnicwilliams.com/2012/04/16/creating-a-bosh-from-scratch-on-aws/" target="_blank">blogs</a> and I'm very thankful to the authors.
+Recently I spent some time playing with BOSH which is a tool for <a href="https://github.com/cloudfoundry/bosh" target="_blank">release engineering, deployment and lifecycle management of large scale distributed services</a>. It is used to manage VMs in AWS and vSphere. The vSphere option seemed to be interesting to me and the idea of having private <a href="http://cloudfoundry.org/" target="_blank">Cloud Foundry</a> PaaS running locally on private infrastructure was exciting. The BOSH is under heavy development and it's sometimes difficult to make things work easily even if following various tutorials and <a href="http://drnicwilliams.com/2012/04/16/creating-a-bosh-from-scratch-on-aws/" target="_blank">blogs</a> and I'm very thankful to the authors.
 
 <!--more-->
 ## vSphere Setup

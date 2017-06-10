@@ -4,7 +4,7 @@ title = "SockJS for Go II (lessons learned)"
 
 +++
 
-It's been a while since implementing <a href="http://blog.igormihalik.com/2012/12/sockjs-for-go.html" target="_blank">SockJS library for Go</a>. Since then I learned couple of new things about the language and runtime. So here I'll try to summarise what it was.
+It's been a while since implementing <a href="{{< relref "post/sockjs-for-go.md" >}}" target="_blank">SockJS library for Go</a>. Since then I learned couple of new things about the language and runtime. So here I'll try to summarise what it was.
 
 <!--more-->
 <h2>Ad: Concurrent Safe Data Structure of Connections </h2>
