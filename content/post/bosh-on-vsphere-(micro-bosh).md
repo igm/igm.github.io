@@ -29,22 +29,22 @@ To deploy Bosh you need Bosh. It's kind of like to get a compiler you need to co
 	$ rake install
 	$ rbenv rehash
 	$ bosh
-	usage: bosh [--verbose] [--config|-c &lt;FILE&gt;] [--cache-dir &lt;DIR]
+	usage: bosh [--verbose] [--config|-c <FILE>] [--cache-dir <DIR]
 	            [--force] [--no-color] [--skip-director-checks] [--quiet]
 	            [--non-interactive]
-	            command [&lt;args&gt;]
+	            command [<args>]
 	...
 	Micro
-	  micro deployment [&lt;name&gt;] Choose micro deployment to work with 
+	  micro deployment [<name>] Choose micro deployment to work with 
 	  micro status              Display micro BOSH deployment status 
 	  micro deployments         Show the list of deployments 
-	  micro deploy &lt;stemcell&gt;   Deploy a micro BOSH instance to the currently 
+	  micro deploy <stemcell>   Deploy a micro BOSH instance to the currently 
 	                            selected deployment 
 	                            --update   update existing instance 
 	  micro delete              Delete micro BOSH instance (including 
 	                            persistent disk) 
-	  micro agent &lt;args&gt;        Send agent messages 
-	  micro apply &lt;spec&gt;        Apply spec &nbsp;
+	  micro agent <args>        Send agent messages 
+	  micro apply <spec>        Apply spec
 
 Next we need micro bosh <a href="https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#deployments" target="_blank">deployment</a> manifest. In the manifest the deployment configuration is stored. The defaults for vSphere can be found in the <a href="https://github.com/cloudfoundry/bosh/blob/master/deployer/config/vsphere_defaults.yml" target="_blank">repository</a> and the manifest for micro Bosh deployment looks like this:
 
