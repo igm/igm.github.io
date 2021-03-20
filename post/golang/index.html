@@ -1,0 +1,25 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><link rel=stylesheet type=text/css media=screen href=//cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css><link rel=stylesheet href=https://igormihalik.com/css/page.css><title>go get...</title></head><body><div class=content><h1>go get...</h1><script id=dsq-count-scr src=//igormihalik.disqus.com/count.js async></script><p>Recently I came across a programming language called GO. At first I was a little skeptical about it, why another language? I spent most of my IT life in Java world, occasionally touching other languages (Ruby, C++, JavaScript, Python, Groovy, Scala, Erlang &mldr;) but GO really got my attention.</p><p>GO is open source programming language, it is productive, concurrent, garbage-collected and builds fast (really fast) due to simple and effective dependency model. Without going into details about the main features of the language (A Tour of Go is the best place to start) here I want to demonstrate the simplicity of installation and usage.</p><h2 id=installation>Installation</h2><p>Installation process is simple. Download the version specific for your operating system and install/unzip. Then two environment variables need to be set in order to integrate GO into system: GOROOT and GOPATH (and optionally PATH).</p><pre><code>$ export GOROOT=/usr/local/go
+$ export GOPATH=~/gobase
+$ export PATH=$GOROOT/bin:$PATH
+$ go env
+GOROOT=&quot;/usr/local/go&quot;
+GOBIN=&quot;&quot;
+GOARCH=&quot;amd64&quot;
+GOCHAR=&quot;6&quot;
+GOOS=&quot;darwin&quot;
+GOEXE=&quot;&quot;
+GOHOSTARCH=&quot;amd64&quot;
+GOHOSTOS=&quot;darwin&quot;
+GOTOOLDIR=&quot;/usr/local/go/pkg/tool/darwin_amd64&quot;
+GOGCCFLAGS=&quot;-g -O2 -fPIC -m64 -pthread -fno-common&quot;
+CGO_ENABLED=&quot;1&quot;
+</code></pre><p>Then we need to create a directory structure according to convention:</p><pre><code>$ mkdir -P $GOPATH/bin
+$ mkdir -P $GOPATH/pkg
+$ mkdir -P $GOPATH/src
+</code></pre><p>Another not really needed, but useful step is to add $GOPATH/bin to your PATH variable:</p><pre><code>export PATH=$GOPATH/bin:$PATH
+</code></pre><h2 id=test-drive>Test Drive</h2><p>Let&rsquo;s test our configuration by installing &ldquo;Hello World&rdquo; sample I&rsquo;ve created and put on github.</p><pre><code>$ go get github.com/igm/go-sample/hello
+$ $GOPATH/bin/hello
+Hello World!
+</code></pre><h2 id=what-just-happened>What just happened?</h2><p>GO downloaded my package called &ldquo;hello&rdquo; from github repository, fetched any external dependencies (source code), compiled it and placed resulting hello binary into GOPATH/bin directory. No need to fetch the source manually, create complex build files (Makefile, Ant, Gradle, Sbt,&mldr;), invoke build process and hope all goes well. It all just happend in one command. Lets try another example, simple HTTP server:</p><pre><code>$ go get github.com/igm/go-sample/webserver
+$ $GOPATH/bin/webserver
+</code></pre><p>Now open the browser and navigate to http://localhost:8080. I want to emphasize that both binary files (hello and webserver) are now GO independent and self-contained applications which basically means you can share them with your friend or customer assuming they are on the same OS architecture as you are (or you can create a binary for their specific OS architecture). They don&rsquo;t need to install anything in order to run them, it just works.</p><h2 id=summary>Summary</h2><p>I think GO will become more popular in the following months. It is ideal language for server side programming and I&rsquo;m sure we&rsquo;ll see it more integrated into the most popular Linux distributions. And of course, you can deploy your GO application to App Engine.</p><h2 id=references>References</h2><ol><li>GO Home Page</li><li>GO Installation instructions</li><li>A Tour of Go</li><li>App Engine GO Runtime</li><li>The Case for #golang</li></ol><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://blog.igormihalik.com",this.page.identifier="/post/golang/"};(function(){var a=document,b=a.createElement('script');b.src='//igormihalik.disqus.com/embed.js',b.setAttribute('data-timestamp',+new Date),(a.head||a.body).appendChild(b)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><script type=text/javascript src=//code.jquery.com/jquery-1.11.0.min.js></script><script type=text/javascript src=//code.jquery.com/jquery-migrate-1.2.1.min.js></script><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js></script><script type=text/javascript>$(function(a){var b=!1,c=!0,d='inside';a(b?'img':'img.fancybox').each(function(){var b=a(this),c=b.attr('title'),d=b.attr('data-big')||b.attr('src'),e=a('<a href="#" class="fancybox"></a>').attr('href',d).attr('title',c);b.wrap(e)}),c&&a('a.fancybox').attr('rel','fancyboxgallery'),a('a.fancybox').fancybox({titlePosition:d})}),$.noConflict()</script></body></html>
