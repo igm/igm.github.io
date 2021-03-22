@@ -1,4 +1,7 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><link rel=stylesheet type=text/css media=screen href=//cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css><link rel=stylesheet href=https://blog.igormihalik.com/css/page.css><title>BOSH on vSphere (micro Bosh)</title></head><body><div class=content><h1>BOSH on vSphere (micro Bosh)</h1><script id=dsq-count-scr src=//igormihalik.disqus.com/count.js async></script><p>Recently I spent some time playing with BOSH which is a tool for release engineering, deployment and lifecycle management of large scale distributed services. It is used to manage VMs in AWS and vSphere. The vSphere option seemed to be interesting to me and the idea of having private Cloud Foundry PaaS running locally on private infrastructure was exciting. The BOSH is under heavy development and it&rsquo;s sometimes difficult to make things work easily even if following various tutorials and blogs and I&rsquo;m very thankful to the authors.</p><h2 id=vsphere-setup>vSphere Setup</h2><p>As an infrastructure I created a cluster of 4 hosts ESXi version 5u1 (esxi1, esxi2, esxi3, esxi4) registered in igmlab.net domain (i.e. esxi1.igmlab.net). All of the hosts were powered by four core CPU wih 16GB of RAM and iSCSI shared storage (IET software based) of 512GB. The internal network had following characteristics: IP range: 192.168.2.0/24, GW/DNS: 192.168.2.107. For VMware vCenter Server SUSE based VM appliance was used (verion 5.0.0).</p><p>Proper network configuration is crucial for correct deployment. Bosh VMs run as guests in ESXi hosts and they access those hosts directly so both the hosts and guests have to share the same network. This is also the case for vCenter Server.</p><h2 id=micro-bosh>Micro Bosh</h2><p>To deploy Bosh you need Bosh. It&rsquo;s kind of like to get a compiler you need to compile one first. Luckily there&rsquo;s a special one called &ldquo;micro Bosh&rdquo; and it can be installed by Bosh CLI addon called Bosh Deployer. So first things first, let&rsquo;s start with Bosh CLI. The current version at the time of writing is 0.9.14. Ruby people should not have any problems installing it via gem install bosh_cli. More detailed instructions are here. The next step is to install Bosh Deployer. For trouble-less installation Ubuntu 10.04.4 LTS Server is suggested. The steps:</p><pre><code>$ gem install bosh_cli
+<!doctype html><html lang=en><head><meta charset=utf-8><link rel=stylesheet type=text/css media=screen href=//cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css><link rel=stylesheet href=https://blog.igormihalik.com/css/page.css><title>BOSH on vSphere (micro Bosh)</title></head><body><div class=content><h1>BOSH on vSphere (micro Bosh)</h1><script id=dsq-count-scr src=//igormihalik.disqus.com/count.js async></script><p>Recently I spent some time playing with BOSH which is a tool for <a href=https://github.com/cloudfoundry/bosh target=_blank>release engineering, deployment and lifecycle management of large scale distributed services</a>. It is used to manage VMs in AWS and vSphere. The vSphere option seemed to be interesting to me and the idea of having private <a href=http://cloudfoundry.org/ target=_blank>Cloud Foundry</a> PaaS running locally on private infrastructure was exciting. The BOSH is under heavy development and it&rsquo;s sometimes difficult to make things work easily even if following various tutorials and <a href=http://drnicwilliams.com/2012/04/16/creating-a-bosh-from-scratch-on-aws/ target=_blank>blogs</a> and I&rsquo;m very thankful to the authors.</p><h2 id=vsphere-setup>vSphere Setup</h2><p>As an infrastructure I created a cluster of 4 hosts ESXi version 5u1 (esxi1, esxi2, esxi3, esxi4) registered in igmlab.net domain (i.e. esxi1.igmlab.net). All of the hosts were powered by four core CPU wih 16GB of RAM and iSCSI shared storage (IET software based) of 512GB. The internal network had following characteristics: IP range: 192.168.2.0/24, GW/DNS: 192.168.2.107. For <a href=http://www.vmware.com/products/vcenter-server/overview.html target=_blank>VMware vCenter Server</a> SUSE based VM appliance was used (verion 5.0.0).</p><p>Proper network configuration is crucial for correct deployment. Bosh VMs run as guests in ESXi hosts and they access those hosts directly so both the hosts and guests have to share the same network. This is also the case for vCenter Server.</p><img src=https://blog.igormihalik.com/images/bosh-on-vsphere-(micro-bosh)/image001.png width=400px class=fancybox>
+<img src=https://blog.igormihalik.com/images/bosh-on-vsphere-(micro-bosh)/image003.png width=400px class=fancybox>
+<img src=https://blog.igormihalik.com/images/bosh-on-vsphere-(micro-bosh)/image005.png width=400px class=fancybox>
+<img src=https://blog.igormihalik.com/images/bosh-on-vsphere-(micro-bosh)/image007.png width=450px class=fancybox><h2 id=micro-bosh>Micro Bosh</h2><p>To deploy Bosh you need Bosh. It&rsquo;s kind of like to get a compiler you need to compile one first. Luckily there&rsquo;s a special one called &ldquo;micro Bosh&rdquo; and it can be installed by Bosh CLI addon called Bosh Deployer. So first things first, let&rsquo;s start with <a href=http://rubygems.org/gems/bosh_cli target=_blank>Bosh CLI</a>. The current version at the time of writing is 0.9.14. Ruby people should not have any problems installing it via <code>gem install bosh_cli</code>. More detailed instructions are <a href=https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#installing-bosh-command-line-interface target=_blank>here</a>. The next step is to install <a href=https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#bosh-installation target=_blank>Bosh Deployer</a>. For trouble-less installation <a href=http://releases.ubuntu.com/lucid/ target=_blank>Ubuntu 10.04.4 LTS Server</a> is suggested. The steps:</p><pre><code>$ gem install bosh_cli
 $ git clone https://github.com/cloudfoundry/bosh.git
 $ cd bosh/deployer
 $ bundle install
@@ -21,4 +24,66 @@ Micro
                             persistent disk) 
   micro agent &lt;args&gt;        Send agent messages 
   micro apply &lt;spec&gt;        Apply spec
-</code></pre><p>Next we need micro bosh deployment manifest. In the manifest the deployment configuration is stored. The defaults for vSphere can be found in the repository and the manifest for micro Bosh deployment looks like this:</p><p>We need to create deployments directory to store our deployment manifest files.</p><p>Micro Bosh Stemcell is a VM template that will be used for our deployment. Deployment manifests define the details that are configured in the VM so that all the network configuration is set properly. It also contains details about the vSphere setup, vCenter connection parameters, resource parameters for VM etc. To get a full list of available Bosh stemcells run:</p><p>At this moment we are interested in micro stemcell (micro-bosh-stemcell-0.1.0.tgz) and we need to download it:</p><p>As soon as we have required stemcell and manifest we can start the deployment procedure:</p><p>Entire process takes several minutes (~20 minutes in my case):</p><p>Now we can target the micro bosh and login with default admin/admin:</p><p>You should also be able to ssh to the micro Bosh:</p><p>The password &lsquo;vmware&rsquo; is what we provided in our manifest in env:bosh:password. You can also generate hash for custom password:</p><p>and use it instead before deploying micro Bosh. And if you think this is all you wanted to do you can delete the deployment:</p><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://blog.igormihalik.com",this.page.identifier="/post/bosh-on-vsphere-micro-bosh/"};(function(){var a=document,b=a.createElement('script');b.src='//igormihalik.disqus.com/embed.js',b.setAttribute('data-timestamp',+new Date),(a.head||a.body).appendChild(b)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><script type=text/javascript src=//code.jquery.com/jquery-1.11.0.min.js></script><script type=text/javascript src=//code.jquery.com/jquery-migrate-1.2.1.min.js></script><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js></script><script type=text/javascript>$(function(a){var b=!1,c=!0,d='inside';a(b?'img':'img.fancybox').each(function(){var b=a(this),c=b.attr('title'),d=b.attr('data-big')||b.attr('src'),e=a('<a href="#" class="fancybox"></a>').attr('href',d).attr('title',c);b.wrap(e)}),c&&a('a.fancybox').attr('rel','fancyboxgallery'),a('a.fancybox').fancybox({titlePosition:d})}),$.noConflict()</script></body></html>
+</code></pre><p>Next we need micro bosh <a href=https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#deployments target=_blank>deployment</a> manifest. In the manifest the deployment configuration is stored. The defaults for vSphere can be found in the <a href=https://github.com/cloudfoundry/bosh/blob/master/deployer/config/vsphere_defaults.yml target=_blank>repository</a> and the manifest for micro Bosh deployment looks like this:</p><script src="https://gist.github.com/3002576.js?file=micro_bosh.yml"></script><p>We need to create deployments directory to store our deployment manifest files.</p><pre>$ mkdir -p ~/deployments/micro
+$ cd ~/deployments/micro
+$ vim micro_bosh.yml
+$ ... copy and update the content of bosh_micro.yml file
+</pre><p>Micro Bosh Stemcell is a VM template that will be used for our deployment. Deployment manifests define the details that are configured in the VM so that all the network configuration is set properly. It also contains details about the vSphere setup, vCenter connection parameters, resource parameters for VM etc. To get a full list of available Bosh stemcells run:</p><pre>$ bosh public stemcells
++---------------------------------+-------------------------------------------------------+
+| Name                            | Url                                                   |
++---------------------------------+-------------------------------------------------------+
+| bosh-stemcell-0.3.0.tgz         | https://blob.cfblob.com/rest/objects/4e4e78bca41e1... |
+| bosh-stemcell-0.4.4.tgz         | https://blob.cfblob.com/rest/objects/4e4e78bca51e1... |
+| bosh-stemcell-0.4.7.tgz         | https://blob.cfblob.com/rest/objects/4e4e78bca21e1... |
+| bosh-stemcell-0.5.2.tgz         | https://blob.cfblob.com/rest/objects/4e4e78bca31e1... |
+| bosh-stemcell-aws-0.5.1.tgz     | https://blob.cfblob.com/rest/objects/4e4e78bca21e1... |
+| bosh-stemcell-vsphere-0.6.0.tgz | https://blob.cfblob.com/rest/objects/4e4e78bca41e1... |
+| bosh-stemcell-vsphere-0.6.1.tgz | https://blob.cfblob.com/rest/objects/4e4e78bca31e1... |
+| micro-bosh-stemcell-0.1.0.tgz   | https://blob.cfblob.com/rest/objects/4e4e78bca51e1... |
++---------------------------------+-------------------------------------------------------+
+To download use 'bosh download public stemcell <stemcell_name>'.For full url use --full.
+</stemcell_name></pre><p>At this moment we are interested in micro stemcell (micro-bosh-stemcell-0.1.0.tgz) and we need to download it:</p><pre>$ mkdir -p ~/stemcells
+$ cd ~/stemcells
+$ bosh download public stemcell micro-bosh-stemcell-0.1.0.tgz 
+</pre><p>As soon as we have required stemcell and manifest we can start the deployment procedure:</p><pre>$ cd ~/deployments
+$ bosh micro deployment micro
+$ bosh micro deploy ~/stemcells/micro-bosh-stemcell-0.1.0.tgz
+Deploying new micro BOSH instance `micro/micro_bosh.yml' to `micro' (type 'yes' to continue): yes
+
+Verifying stemcell...
+File exists and readable                                     OK
+Using cached manifest...
+Stemcell properties                                          OK
+
+Stemcell info
+-------------
+Name:    bosh-stemcell
+Version: 0.5.1
+
+
+Deploy Micro BOSH
+  unpacking stemcell (00:00:26)                                                 
+  uploading stemcell (00:06:21)                                                 
+  creating VM from sc-d8ed6782-ff50-4e1d-ac47-519b225ba85a (00:09:02)           
+  waiting for the agent (00:01:34)                                              
+  create disk (00:00:00)                                                        
+  mount disk (00:00:42)                                                         
+  stopping agent services (00:00:00)                                            
+  applying micro BOSH spec (00:01:12)                                           
+  starting agent services (00:00:00)                                            
+  waiting for the director (00:00:49)                                           
+Done             11/11 00:20:41                                                 
+Deployed `micro/micro_bosh.yml' to `micro', took 00:20:41 to complete
+</pre><p>Entire process takes several minutes (~20 minutes in my case):</p><img src=https://blog.igormihalik.com/images/bosh-on-vsphere-(micro-bosh)/image009.png width=400px class=fancybox><p>Now we can target the micro bosh and login with default admin/admin:</p><img src=https://blog.igormihalik.com/images/bosh-on-vsphere-(micro-bosh)/image011.png width=400px class=fancybox><pre>$ bosh target 192.168.2.120:25555
+$ bosh status
+Updating director data... done
+
+Target         micro (http://192.168.2.120:25555) Ver: 0.4 (00000000)
+UUID           a5d6347d-3b66-465f-ae06-2444db70dce3
+User           admin
+Deployment     not set
+</pre><p>You should also be able to ssh to the micro Bosh:</p><pre>$ ssh root@192.168.2.120
+root@192.168.2.120's password: vmware
+</pre><p>The password &lsquo;vmware&rsquo; is what we provided in our manifest in env:bosh:password. You can also generate hash for custom password:</p><pre>$ mkpasswd -m sha-512
+</pre><p>and use it instead before deploying micro Bosh. And if you think this is all you wanted to do you can delete the deployment:</p><pre>$ bosh micro delete
+</pre><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://blog.igormihalik.com",this.page.identifier="/post/bosh-on-vsphere-micro-bosh/"};(function(){var a=document,b=a.createElement('script');b.src='//igormihalik.disqus.com/embed.js',b.setAttribute('data-timestamp',+new Date),(a.head||a.body).appendChild(b)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><script type=text/javascript src=//code.jquery.com/jquery-1.11.0.min.js></script><script type=text/javascript src=//code.jquery.com/jquery-migrate-1.2.1.min.js></script><script type=text/javascript src=//cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js></script><script type=text/javascript>$(function(a){var b=!1,c=!0,d='inside';a(b?'img':'img.fancybox').each(function(){var b=a(this),c=b.attr('title'),d=b.attr('data-big')||b.attr('src'),e=a('<a href="#" class="fancybox"></a>').attr('href',d).attr('title',c);b.wrap(e)}),c&&a('a.fancybox').attr('rel','fancyboxgallery'),a('a.fancybox').fancybox({titlePosition:d})}),$.noConflict()</script></body></html>
