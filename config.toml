@@ -4,5 +4,8 @@ title = "Anything about Everything"
 
 canonifyurls = true
 
+[markup.goldmark.renderer]
+unsafe = true
+
 [params]
   author = "Igor Mihalik" 

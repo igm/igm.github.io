@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="/css/page.css">
+	</head>
+	<body>
+		<div class="content">
+			<h1>{{.Title}}</h1>
+			by igm
+			<ul>
+				{{ range where .Site.Pages "Section" "post" }}
+				{{ if not .IsSection }}
+				<li>
+				<a href="{{.Permalink}}">{{.Title}}</a> ({{dateFormat "02. Jan 2006" .Date}})
+				</li>
+				{{.Summary}}
+				{{ end }}
+				{{ end }}
+			</ul>
+		</div>
+	</body>
+
+</html>
