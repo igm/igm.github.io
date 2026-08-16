@@ -1,6 +1,10 @@
 <div id="disqus_thread" class="comments"></div>
 <script>
   window.addEventListener('load', function () {
+    window.disqus_config = function () {
+      this.page.url = '{{ .Permalink }}';
+      this.page.identifier = '{{ .RelPermalink }}';
+    };
     var d = document, s = d.createElement('script');
     s.src = 'https://igormihalik.disqus.com/embed.js';
     s.setAttribute('data-timestamp', +new Date());
