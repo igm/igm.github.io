@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Anything about Everything</title>
+    <link>https://blog.igormihalik.com/</link>
+    <description>Notes on Go, Cloud Foundry, BOSH and other software adventures.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 16 Aug 2026 09:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.igormihalik.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GO applications and Cloud Foundry</title>
+      <link>https://blog.igormihalik.com/post/go-applications-and-cloud-foundry/</link>
+      <guid>https://blog.igormihalik.com/post/go-applications-and-cloud-foundry/</guid>
+      <pubDate>Tue, 26 May 2015 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>SockJS for Go III — yet another take</title>
+      <link>https://blog.igormihalik.com/post/sockjs-for-go-iii-yet-another-take/</link>
+      <guid>https://blog.igormihalik.com/post/sockjs-for-go-iii-yet-another-take/</guid>
+      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>SockJS for Go II — lessons learned</title>
+      <link>https://blog.igormihalik.com/post/sockjs-for-go-ii-lessons-learned/</link>
+      <guid>https://blog.igormihalik.com/post/sockjs-for-go-ii-lessons-learned/</guid>
+      <pubDate>Fri, 31 May 2013 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>SockJS for Go</title>
+      <link>https://blog.igormihalik.com/post/sockjs-for-go/</link>
+      <guid>https://blog.igormihalik.com/post/sockjs-for-go/</guid>
+      <pubDate>Tue, 11 Dec 2012 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>go get...</title>
+      <link>https://blog.igormihalik.com/post/golang/</link>
+      <guid>https://blog.igormihalik.com/post/golang/</guid>
+      <pubDate>Thu, 06 Sep 2012 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>BOSH on vSphere (micro Bosh)</title>
+      <link>https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/</link>
+      <guid>https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/</guid>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

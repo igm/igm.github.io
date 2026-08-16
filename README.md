@@ -7,7 +7,8 @@ Source for [blog.igormihalik.com](https://blog.igormihalik.com) — plain HTML, 
 1. `cp -r post/_template "post/my-post-slug"` — the directory name **is** the URL: `/post/my-post-slug/`
 2. Edit the copy — replace `POST TITLE`, `YOUR-SLUG`, dates, and write the content. Copy content blocks (`<p>`, `<pre><code>`, `<img>`) from any existing post.
 3. Add it to the top of the list in `index.html` (title + date + link) and in `post/index.html` (same).
-4. Commit to `master` and push — CI publishes to `gh-pages` (the live branch) within a minute.
+4. Add a `<item>` to `index.xml` and a `<url>` to `sitemap.xml`.
+5. Commit to `master` and push — CI publishes to `gh-pages` (the live branch) within a minute.
 
 ## Repo layout
 
@@ -20,6 +21,8 @@ post/
 css/page.css        the whole design, one file
 images/             post images
 404.html            not-found page
+index.xml           RSS feed (add a new <item> per post)
+sitemap.xml         sitemap (add a new <url> per page)
 CNAME               custom domain (blog.igormihalik.com)
 .nojekyll           skip GitHub's Jekyll pass
 ```
