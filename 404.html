@@ -1,58 +1,32 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>404 Page not found · Anything about Everything</title>
-
-  <meta name="description" content="Notes on Go, Cloud Foundry, BOSH and other software adventures.">
-
-
-  <link rel="canonical" href="https://blog.igormihalik.com/404.html">
-
-<link rel="stylesheet" href="/css/page.css">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Anything about Everything">
-<meta property="og:title" content="404 Page not found">
-<meta property="og:url" content="https://blog.igormihalik.com/404.html">
-
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="404 Page not found">
-
-
-
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found · Anything about Everything</title>
+  <meta name="robots" content="noindex">
+  <style>
+    /* Self-contained: renders correctly at any URL depth and from file:// */
+    :root { --bg: #faf9f7; --text: #1f2937; --muted: #6b7280; --accent: #9a3412; --border: #e5e2dd; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.7; color: var(--text); background: var(--bg);
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    main { flex: 1; width: min(44rem, 100% - 2.5rem); margin-inline: auto; padding-block: 4rem; text-align: center; }
+    h1 { font-size: 5rem; margin: 0; letter-spacing: -0.02em; }
+    p { color: var(--muted); }
+    a { color: var(--accent); }
+    footer { border-top: 1px solid var(--border); padding: 1.5rem; color: var(--muted); font-size: 0.9rem; text-align: center; }
+  </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-
-<header class="site-header">
-  <div class="content header-inner">
-    <a class="site-title" href="/">Anything about Everything</a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="/post/" >Archive</a>
-      <a href="https://github.com/igm" rel="me">GitHub</a>
-    </nav>
-  </div>
-</header>
-
-
-<main id="main" class="content">
-  
-  <section class="notfound">
-    <h1>404</h1>
-    <p>That page doesn't exist — the URL may have changed.</p>
-    <p><a href="/">← Back home</a></p>
-  </section>
-
+<main>
+  <h1>404</h1>
+  <p>That page doesn't exist — the URL may have changed.</p>
+  <p><a href="https://blog.igormihalik.com/">← Back to blog.igormihalik.com</a></p>
 </main>
-
-<footer class="site-footer">
-  <div class="content">
-    <p>© 2026 Igor Mihalik</p>
-  </div>
-</footer>
-
+<footer>© 2026 Igor Mihalik</footer>
 </body>
 </html>

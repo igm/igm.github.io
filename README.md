@@ -33,3 +33,7 @@ CNAME               custom domain (blog.igormihalik.com)
 ## Deployment
 
 Push to `master` → `.github/workflows/deploy.yml` force-pushes the tree to `gh-pages` → GitHub Pages serves it at [blog.igormihalik.com](https://blog.igormihalik.com). No build step, no third-party actions.
+
+## Previewing
+
+No tooling needed: open `index.html` in a browser straight from a checkout — internal links and assets are relative, so every page renders from the filesystem, from any local static server, and from GitHub Pages alike.

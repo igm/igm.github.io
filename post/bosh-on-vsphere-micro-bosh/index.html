@@ -10,7 +10,7 @@
 
   <link rel="canonical" href="https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/">
 
-<link rel="stylesheet" href="/css/page.css">
+<link rel="stylesheet" href="../../css/page.css">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Anything about Everything">
 <meta property="og:title" content="BOSH on vSphere (micro Bosh)">
@@ -35,9 +35,9 @@
 
 <header class="site-header">
   <div class="content header-inner">
-    <a class="site-title" href="/">Anything about Everything</a>
+    <a class="site-title" href="../../">Anything about Everything</a>
     <nav class="site-nav" aria-label="Main">
-      <a href="/post/" >Archive</a>
+      <a href="../../post/index.html" >Archive</a>
       <a href="https://github.com/igm" rel="me">GitHub</a>
     </nav>
   </div>
@@ -57,10 +57,10 @@
 <h2 id="vsphere-setup">vSphere Setup</h2>
 <p>As an infrastructure I created a cluster of 4 hosts ESXi version 5u1 (esxi1, esxi2, esxi3, esxi4) registered in igmlab.net domain (i.e. esxi1.igmlab.net). All of the hosts were powered by four core CPU wih 16GB of RAM and iSCSI shared storage (IET software based) of 512GB. The internal network had following characteristics: IP range: 192.168.2.0/24, GW/DNS: 192.168.2.107. For <a href="http://www.vmware.com/products/vcenter-server/overview.html" target="_blank">VMware vCenter Server</a> SUSE based VM appliance was used (verion 5.0.0).</p>
 <p>Proper network configuration is crucial for correct deployment. Bosh VMs run as guests in ESXi hosts and they access those hosts directly so both the hosts and guests have to  share the same network. This is also the case for vCenter Server.</p>
-<img src="/images/bosh-on-vsphere-(micro-bosh)/image001.png" width="400px" class="fancybox"/>
-<img src="/images/bosh-on-vsphere-(micro-bosh)/image003.png" width="400px" class="fancybox"/>
-<img src="/images/bosh-on-vsphere-(micro-bosh)/image005.png" width="400px" class="fancybox"/>
-<img src="/images/bosh-on-vsphere-(micro-bosh)/image007.png" width="450px" class="fancybox"/>
+<img src="../../images/bosh-on-vsphere-(micro-bosh)/image001.png" width="400px" class="fancybox"/>
+<img src="../../images/bosh-on-vsphere-(micro-bosh)/image003.png" width="400px" class="fancybox"/>
+<img src="../../images/bosh-on-vsphere-(micro-bosh)/image005.png" width="400px" class="fancybox"/>
+<img src="../../images/bosh-on-vsphere-(micro-bosh)/image007.png" width="450px" class="fancybox"/>
 <!-- <a href="http://1.bp.blogspot.com/-2karvJbVftY/T-x7jufBU_I/AAAAAAAAHXA/1hlRtfY-WzU/s1600/image001.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://1.bp.blogspot.com/-2karvJbVftY/T-x7jufBU_I/AAAAAAAAHXA/1hlRtfY-WzU/s400/image001.png" width="400" /></a>   <a href="http://4.bp.blogspot.com/-uobwxIfuGLs/T-x7nnthoKI/AAAAAAAAHXI/3Cc42WtR5ig/s1600/image003.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://4.bp.blogspot.com/-uobwxIfuGLs/T-x7nnthoKI/AAAAAAAAHXI/3Cc42WtR5ig/s400/image003.png" width="400" /></a>  <a href="http://4.bp.blogspot.com/-h0f5TNAUTf4/T-x7wp00aDI/AAAAAAAAHXY/leiMecqlMJA/s1600/image005.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://4.bp.blogspot.com/-h0f5TNAUTf4/T-x7wp00aDI/AAAAAAAAHXY/leiMecqlMJA/s400/image005.png" width="400" /></a>   <a href="http://1.bp.blogspot.com/-ZwTIKafeAKo/T-x7zTts_2I/AAAAAAAAHXg/33Lm4S3Sj34/s1600/image007.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://1.bp.blogspot.com/-ZwTIKafeAKo/T-x7zTts_2I/AAAAAAAAHXg/33Lm4S3Sj34/s400/image007.png" width="400" /></a>   -->
 <h2 id="micro-bosh">Micro Bosh</h2>
 <p>To deploy Bosh you need Bosh. It&rsquo;s kind of like to get a compiler you need to compile one first. Luckily there&rsquo;s a special one called &ldquo;micro Bosh&rdquo; and it can be installed by Bosh CLI addon called Bosh Deployer. So first things first, let&rsquo;s start with <a href="http://rubygems.org/gems/bosh_cli" target="_blank">Bosh CLI</a>. The current version at the time of writing is 0.9.14. Ruby people should not have any problems installing it via <code>gem install bosh_cli</code>. More detailed instructions are <a href="https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#installing-bosh-command-line-interface" target="_blank">here</a>. The next step is to install <a href="https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#bosh-installation" target="_blank">Bosh Deployer</a>. For trouble-less installation <a href="http://releases.ubuntu.com/lucid/" target="_blank">Ubuntu 10.04.4 LTS Server</a> is suggested. The steps:</p>
@@ -150,9 +150,9 @@ Done             11/11 00:20:41
 Deployed `micro/micro_bosh.yml' to `micro', took 00:20:41 to complete
 </pre>
 <p>Entire process takes several minutes (~20 minutes in my case):</p>
-<img src="/images/bosh-on-vsphere-(micro-bosh)/image009.png" width="400px" class="fancybox">
+<img src="../../images/bosh-on-vsphere-(micro-bosh)/image009.png" width="400px" class="fancybox">
 <p>Now we can target the micro bosh and login with default admin/admin:</p>
-<img src="/images/bosh-on-vsphere-(micro-bosh)/image011.png" width="400px" class="fancybox"/>
+<img src="../../images/bosh-on-vsphere-(micro-bosh)/image011.png" width="400px" class="fancybox"/>
 <pre>$ bosh target 192.168.2.120:25555
 $ bosh status
 Updating director data... done

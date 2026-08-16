@@ -10,7 +10,7 @@
 
   <link rel="canonical" href="https://blog.igormihalik.com/post/sockjs-for-go-ii-lessons-learned/">
 
-<link rel="stylesheet" href="/css/page.css">
+<link rel="stylesheet" href="../../css/page.css">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Anything about Everything">
 <meta property="og:title" content="SockJS for Go II (lessons learned)">
@@ -35,9 +35,9 @@
 
 <header class="site-header">
   <div class="content header-inner">
-    <a class="site-title" href="/">Anything about Everything</a>
+    <a class="site-title" href="../../">Anything about Everything</a>
     <nav class="site-nav" aria-label="Main">
-      <a href="/post/" >Archive</a>
+      <a href="../../post/index.html" >Archive</a>
       <a href="https://github.com/igm" rel="me">GitHub</a>
     </nav>
   </div>
@@ -53,7 +53,7 @@
         <time datetime="2013-05-31">May 31, 2013</time>
       </p>
     </header>
-    <p>It&rsquo;s been a while since implementing <a href="/post/sockjs-for-go/" target="_blank">SockJS library for Go</a>. Since then I learned couple of new things about the language and runtime. So here I&rsquo;ll try to summarise what it was.</p>
+    <p>It&rsquo;s been a while since implementing <a href="../../post/sockjs-for-go/index.html" target="_blank">SockJS library for Go</a>. Since then I learned couple of new things about the language and runtime. So here I&rsquo;ll try to summarise what it was.</p>
 <h2>Ad: Concurrent Safe Data Structure of Connections </h2>
 It's always a problem with shared data. I was choosing between using locks or channels and in the end I decided to go with channels (see <a href="https://github.com/igm/sockjs-go/blob/91373aa7f38d861719a8225a05abdd5f82904781/sockjs/sessions.go" target="_blank">sessions.go</a>). However this approach has some disadvantages. First of all it does not distinguish between read operations and write operations. And in fact what we can have is concurrent reads. We don't need to serialize read operations into channel. I've concluded that in this case it is better to use sync.RWLock. So I've changed the implementation to use sync.RLock()/RUnlock() for read operations and sync.Lock()/Unlock() for write operations (see <a href="https://github.com/igm/sockjs-go/blob/7f310b61fda162822d5006e0830dbe8d82d459ae/sockjs/sessions.go" target="_blank">sessions.go</a>).
 <h2>Go Routines Leaking</h2>
