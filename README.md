@@ -30,8 +30,7 @@ CNAME               custom domain (blog.igormihalik.com)
 ## Design
 
 - One CSS file (`css/page.css`): warm paper palette, system fonts, ~44rem reading column, dark rounded code blocks, native `<dialog>` lightbox for post images.
-- No JavaScript dependencies — the only JS is the inline lightbox and the Disqus embed, both inside each post page.
-- Disqus threads are keyed by `this.page.identifier = '/post/<slug>/'` — keep that unchanged when editing a post so existing comments stay attached.
+- No JavaScript dependencies and no third-party embeds — the only JS is the inline lightbox in each post page.
 
 ## Deployment
 

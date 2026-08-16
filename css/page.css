@@ -266,9 +266,6 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 
 figure { margin: 1.5rem 0; }
 
-/* Comments */
-.comments { margin-top: 3rem; }
-
 /* 404 */
 .notfound { padding-block: 3rem; text-align: center; }
 .notfound h1 { font-size: 4rem; margin-bottom: 0.5rem; }
