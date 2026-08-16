@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>POST TITLE · Anything about Everything</title>
+  <meta name="description" content="One-line summary for search engines and link previews.">
+  <link rel="canonical" href="https://blog.igormihalik.com/post/YOUR-SLUG/">
+  <link rel="stylesheet" href="../../css/page.css">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Anything about Everything">
+  <meta property="og:title" content="POST TITLE">
+  <meta property="og:url" content="https://blog.igormihalik.com/post/YOUR-SLUG/">
+  <meta property="og:description" content="One-line summary.">
+  <meta property="article:published_time" content="2026-01-01T00:00:00Z">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="content header-inner">
+    <a class="site-title" href="../../">Anything about Everything</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../../post/index.html">Archive</a>
+      <a href="https://github.com/igm" rel="me">GitHub</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="content">
+  <article class="post">
+    <header class="post-header">
+      <h1>POST TITLE</h1>
+      <p class="post-meta"><time datetime="2026-01-01">January 1, 2026</time></p>
+    </header>
+
+    <!--
+      Content goes here. Copy blocks from an existing post:
+      - paragraphs and headings: <p>, <h2>
+      - code: <pre><code>...</code></pre>  (add class="language-go" for colors)
+      - image (click to enlarge): <img src="../../images/..." alt="...">
+      Keep the closing tags below intact.
+    -->
+
+  </article>
+  <script>
+  /* Vanilla lightbox: clicks on post images open a native <dialog>. */
+  (function () {
+    'use strict';
+    var post = document.querySelector('.post');
+    if (!post || !document.createElement('dialog').showModal) return;
+
+    var dlg = document.createElement('dialog');
+    dlg.className = 'lightbox';
+    dlg.setAttribute('aria-label', 'Image');
+    dlg.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close">&times;</button>';
+    var img = document.createElement('img');
+    img.alt = '';
+    dlg.insertBefore(img, dlg.firstChild);
+    document.body.appendChild(dlg);
+
+    function open(src, alt) {
+      img.src = src;
+      img.alt = alt || '';
+      dlg.showModal();
+    }
+
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg || e.target.closest('.lightbox-close')) dlg.close();
+    });
+
+    post.addEventListener('click', function (e) {
+      var el = e.target;
+      if (el.tagName !== 'IMG') return;
+      var a = el.closest('a');
+      if (a && a.getAttribute('href') !== el.src) return; /* keep real links working */
+      e.preventDefault();
+      open(el.currentSrc || el.src, el.alt);
+    });
+  })();
+  </script>
+  <div id="disqus_thread" class="comments"></div>
+  <script>
+  window.addEventListener('load', function () {
+    window.disqus_config = function () {
+      this.page.url = 'https://blog.igormihalik.com/post/YOUR-SLUG/';
+      this.page.identifier = '/post/YOUR-SLUG/';
+    };
+    var d = document, s = d.createElement('script');
+    s.src = 'https://igormihalik.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  });
+  </script>
+  <noscript>
+    Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</main>
+<footer class="site-footer">
+  <div class="content"><p>© 2026 Igor Mihalik</p></div>
+</footer>
+</body>
+</html>
