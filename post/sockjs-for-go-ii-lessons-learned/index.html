@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SockJS for Go II (lessons learned) · Anything about Everything</title>
+
+  <meta name="description" content="It&amp;rsquo;s been a while since implementing SockJS library for Go. Since then I learned couple of new things about the language and runtime. So here I&amp;rsquo;ll try to summarise what it was.">
+
+
+  <link rel="canonical" href="https://blog.igormihalik.com/post/sockjs-for-go-ii-lessons-learned/">
+
+<link rel="stylesheet" href="/css/page.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Anything about Everything">
+<meta property="og:title" content="SockJS for Go II (lessons learned)">
+<meta property="og:url" content="https://blog.igormihalik.com/post/sockjs-for-go-ii-lessons-learned/">
+
+  <meta property="og:description" content="It&amp;rsquo;s been a while since implementing SockJS library for Go. Since then I learned couple of new things about the language and runtime. So here I&amp;rsquo;ll try to summarise what it was.">
+
+
+  <meta property="article:published_time" content="2013-05-31T22:33:44&#43;02:00">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SockJS for Go II (lessons learned)">
+
+  <meta name="twitter:description" content="It&amp;rsquo;s been a while since implementing SockJS library for Go. Since then I learned couple of new things about the language and runtime. So here I&amp;rsquo;ll try to summarise what it was.">
+
+
+
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="content header-inner">
+    <a class="site-title" href="/">Anything about Everything</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/post/" >Archive</a>
+      <a href="https://github.com/igm" rel="me">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+
+<main id="main" class="content">
+  
+  <article class="post">
+    <header class="post-header">
+      <h1>SockJS for Go II (lessons learned)</h1>
+      <p class="post-meta">
+        <time datetime="2013-05-31">May 31, 2013</time>
+      </p>
+    </header>
+    <p>It&rsquo;s been a while since implementing <a href="/post/sockjs-for-go/" target="_blank">SockJS library for Go</a>. Since then I learned couple of new things about the language and runtime. So here I&rsquo;ll try to summarise what it was.</p>
+<h2>Ad: Concurrent Safe Data Structure of Connections </h2>
+It's always a problem with shared data. I was choosing between using locks or channels and in the end I decided to go with channels (see <a href="https://github.com/igm/sockjs-go/blob/91373aa7f38d861719a8225a05abdd5f82904781/sockjs/sessions.go" target="_blank">sessions.go</a>). However this approach has some disadvantages. First of all it does not distinguish between read operations and write operations. And in fact what we can have is concurrent reads. We don't need to serialize read operations into channel. I've concluded that in this case it is better to use sync.RWLock. So I've changed the implementation to use sync.RLock()/RUnlock() for read operations and sync.Lock()/Unlock() for write operations (see <a href="https://github.com/igm/sockjs-go/blob/7f310b61fda162822d5006e0830dbe8d82d459ae/sockjs/sessions.go" target="_blank">sessions.go</a>).
+<h2>Go Routines Leaking</h2>
+It is easy to leak go routines. At first I did not realize that, but I started to worry after seeing memory consumption going up over time. After sending SIGQUIT signal (or Ctrl+\ on Linux) to the running process all was clear. Too many zombie routines hanging around. To demonstrate the problem have a look at this trivial example:
+<script src="https://gist.github.com/igm/5687664.js"></script>
+<p>You can run it <a href="http://play.golang.org/p/MO8bN7_PqC" target="_blank">here</a>. In the output you&rsquo;ll see 2 routines. Notice routine 2 in &ldquo;chan send&rdquo; state. It is trying to send to the channel but that operation is never going to happen. And that is exactly what happened in my routines <a href="https://github.com/igm/sockjs-go/blob/b02995736d79745f95338a4a96e4e8dc9cbe47d2/sockjs/websocket.go#L58" target="_blank">here</a> and <a href="https://github.com/igm/sockjs-go/blob/cffe91abcddc3bd4c71350ec3b31fea08b381620/sockjs/rawwebsocket.go#L14" target="_blank">here</a>. One of the solution is to make channel &ldquo;buffered&rdquo;. In this specific case it is enough to set buffer length to 1:</p>
+<pre class="terminal">ch := make(chan bool, 1)</pre>
+<p>Other option would be to close the channel but that has different consequences (you can try it yourself and see what happens).</p>
+<h2>Conclusion</h2>
+I have two sources to recommend that I consider very useful:
+<ul>
+<li> <a href="https://www.youtube.com/watch?v=QDDwwePbDtw" target="_blank">Google I/O 2013 - Advanced Go Concurrency Patterns by Sameer Ajmani </a>
+</li>
+<li> <a href="http://dave.cheney.net/2013/04/30/curious-channels" target="_blank">Curious Channels by Dave Cheney</a>
+</li>
+</ul>
+  </article>
+  
+<script>
+  (function () {
+    'use strict';
+    var post = document.querySelector('.post');
+    if (!post || !document.createElement('dialog').showModal) return;
+
+    var dlg = document.createElement('dialog');
+    dlg.className = 'lightbox';
+    dlg.setAttribute('aria-label', 'Image');
+    dlg.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close">&times;</button>';
+    var img = document.createElement('img');
+    img.alt = '';
+    dlg.insertBefore(img, dlg.firstChild);
+    document.body.appendChild(dlg);
+
+    function open(src, alt) {
+      img.src = src;
+      img.alt = alt || '';
+      dlg.showModal();
+    }
+
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg || e.target.closest('.lightbox-close')) dlg.close();
+    });
+
+    post.addEventListener('click', function (e) {
+      var el = e.target;
+      if (el.tagName !== 'IMG') return;
+      var a = el.closest('a');
+      if (a && a.getAttribute('href') !== el.src) return;  
+      e.preventDefault();
+      open(el.currentSrc || el.src, el.alt);
+    });
+  })();
+</script>
+
+  
+    <div id="disqus_thread" class="comments"></div>
+<script>
+  window.addEventListener('load', function () {
+    window.disqus_config = function () {
+      this.page.url = '\/post\/sockjs-for-go-ii-lessons-learned\/';
+      this.page.identifier = '\/post\/sockjs-for-go-ii-lessons-learned\/';
+    };
+    var d = document, s = d.createElement('script');
+    s.src = 'https://igormihalik.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  });
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+
+  
+
+</main>
+
+<footer class="site-footer">
+  <div class="content">
+    <p>© 2026 Igor Mihalik</p>
+  </div>
+</footer>
+
+</body>
+</html>
