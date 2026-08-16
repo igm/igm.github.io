@@ -1,11 +1,16 @@
 baseurl = "https://blog.igormihalik.com"
-languageCode = "en-us"
+locale = "en-us"
 title = "Anything about Everything"
 
 canonifyurls = true
+paginate = 10
 
-[markup.goldmark.renderer]
-unsafe = true
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = true
 
 [params]
-  author = "Igor Mihalik" 
+  author = "Igor Mihalik"
+  description = "Notes on Go, Cloud Foundry, BOSH and other software adventures."

@@ -1,0 +1,5 @@
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ .Title }}">
+{{ with or .Description .Summary }}
+  <meta name="twitter:description" content="{{ trim (plainify .) "\n\r\t " | truncate 200 }}">
+{{ end }}

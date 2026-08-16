@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <article class="post">
+    <header class="post-header">
+      <h1>{{ .Title }}</h1>
+      <p class="post-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      </p>
+    </header>
+    {{ .Content }}
+  </article>
+  {{ partial "lightbox.html" . }}
+  {{ if and (not site.Params.disableComments) (not hugo.IsServer) }}
+    {{ partial "comments.html" . }}
+  {{ end }}
+{{ end }}

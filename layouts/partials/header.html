@@ -1,0 +1,9 @@
+<header class="site-header">
+  <div class="content header-inner">
+    <a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="{{ "post/" | relURL }}" {{ if .IsSection }}aria-current="page"{{ end }}>Archive</a>
+      <a href="{{ site.Params.authorGithub | default "https://github.com/igm" }}" rel="me">GitHub</a>
+    </nav>
+  </div>
+</header>

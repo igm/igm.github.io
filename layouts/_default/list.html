@@ -1,0 +1,19 @@
+{{ define "main" }}
+  {{ $paginator := .Paginate (where site.RegularPages "Type" "post") }}
+  {{ if eq $paginator.PageNumber 1 }}
+    <p class="intro">{{ site.Params.description | default (print "Notes on software by " site.Params.author ".") }}</p>
+  {{ end }}
+  <section class="post-list">
+    {{ range $paginator.Pages }}
+      <article class="post-card">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p class="post-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+        </p>
+        {{ .Summary }}
+        <p class="read-more"><a href="{{ .RelPermalink }}">Read&nbsp;→</a></p>
+      </article>
+    {{ end }}
+  </section>
+  {{ template "_internal/pagination.html" . }}
+{{ end }}

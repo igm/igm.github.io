@@ -1,0 +1,36 @@
+{{/* Minimal vanilla lightbox: clicks on post images open a native <dialog>. */}}
+<script>
+  (function () {
+    'use strict';
+    var post = document.querySelector('.post');
+    if (!post || !document.createElement('dialog').showModal) return;
+
+    var dlg = document.createElement('dialog');
+    dlg.className = 'lightbox';
+    dlg.setAttribute('aria-label', 'Image');
+    dlg.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close">&times;</button>';
+    var img = document.createElement('img');
+    img.alt = '';
+    dlg.insertBefore(img, dlg.firstChild);
+    document.body.appendChild(dlg);
+
+    function open(src, alt) {
+      img.src = src;
+      img.alt = alt || '';
+      dlg.showModal();
+    }
+
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg || e.target.closest('.lightbox-close')) dlg.close();
+    });
+
+    post.addEventListener('click', function (e) {
+      var el = e.target;
+      if (el.tagName !== 'IMG') return;
+      var a = el.closest('a');
+      if (a && a.getAttribute('href') !== el.src) return; /* keep real links working */
+      e.preventDefault();
+      open(el.currentSrc || el.src, el.alt);
+    });
+  })();
+</script>

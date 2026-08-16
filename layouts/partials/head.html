@@ -1,0 +1,12 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }} — {{ site.Params.author | default "igm" }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+{{ with or .Description .Summary site.Params.description }}
+  <meta name="description" content="{{ trim (plainify .) "\n\r\t " }}">
+{{ end }}
+{{ if hugo.IsProduction }}
+  <link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
+<link rel="stylesheet" href="{{ "css/page.css" | relURL }}">
+<link rel="icon" href="{{ "favicon.ico" | relURL }}">
+{{ partial "opengraph.html" . }}
