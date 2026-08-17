@@ -1583,6 +1583,140 @@
                         },
                         {
                           "type": "frame",
+                          "id": "p5JAJ",
+                          "name": "x.com/igormihalik",
+                          "width": "fill_container",
+                          "cornerRadius": 9,
+                          "stroke": "$border-soft",
+                          "strokeWidth": 1,
+                          "gap": 10,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "g4RrlT",
+                              "name": "Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "x",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "LSlNL",
+                              "name": "Text",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 2,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "DC1MQ",
+                                  "name": "Link",
+                                  "fill": "$text",
+                                  "content": "x.com/igormihalik",
+                                  "fontFamily": "$font-mono",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "tOUcT",
+                                  "name": "Sub",
+                                  "fill": "$faint",
+                                  "content": "say hello",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "icon",
+                              "id": "eMTZh",
+                              "name": "Out",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "arrow-up-right",
+                              "library": "lucide",
+                              "fill": "$border"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "avzIe",
+                          "name": "linkedin.com/in/mihalik",
+                          "width": "fill_container",
+                          "cornerRadius": 9,
+                          "stroke": "$border-soft",
+                          "strokeWidth": 1,
+                          "gap": 10,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "KBYaT",
+                              "name": "Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "linkedin",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "KsxvA",
+                              "name": "Text",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 2,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "jjMNI",
+                                  "name": "Link",
+                                  "fill": "$text",
+                                  "content": "linkedin.com/in/mihalik",
+                                  "fontFamily": "$font-mono",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Vd7ZB",
+                                  "name": "Sub",
+                                  "fill": "$faint",
+                                  "content": "the work history",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "icon",
+                              "id": "XnAIU",
+                              "name": "Out",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "arrow-up-right",
+                              "library": "lucide",
+                              "fill": "$border"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
                           "id": "mHUBy",
                           "name": "index.xml",
                           "width": "fill_container",
@@ -1639,73 +1773,6 @@
                             {
                               "type": "icon",
                               "id": "vqkFG",
-                              "name": "Out",
-                              "width": 12,
-                              "height": 12,
-                              "icon": "arrow-up-right",
-                              "library": "lucide",
-                              "fill": "$border"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "p5JAJ",
-                          "name": "igor.mihalik@gmail.com",
-                          "width": "fill_container",
-                          "cornerRadius": 9,
-                          "stroke": "$border-soft",
-                          "strokeWidth": 1,
-                          "gap": 10,
-                          "padding": [
-                            8,
-                            10
-                          ],
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "icon",
-                              "id": "g4RrlT",
-                              "name": "Icon",
-                              "width": 14,
-                              "height": 14,
-                              "icon": "mail",
-                              "library": "lucide",
-                              "fill": "$muted"
-                            },
-                            {
-                              "type": "frame",
-                              "id": "LSlNL",
-                              "name": "Text",
-                              "width": "fill_container",
-                              "layout": "vertical",
-                              "gap": 2,
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "id": "DC1MQ",
-                                  "name": "Link",
-                                  "fill": "$text",
-                                  "content": "igor.mihalik@gmail.com",
-                                  "fontFamily": "$font-mono",
-                                  "fontSize": 11.5,
-                                  "fontWeight": "normal"
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "tOUcT",
-                                  "name": "Sub",
-                                  "fill": "$faint",
-                                  "content": "say hello",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 11,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "icon",
-                              "id": "eMTZh",
                               "name": "Out",
                               "width": 12,
                               "height": 12,
@@ -3714,7 +3781,7 @@
                         {
                           "type": "frame",
                           "id": "TW1mJ",
-                          "name": "mail",
+                          "name": "x",
                           "width": "fill_container",
                           "height": 34,
                           "cornerRadius": 9,
@@ -3729,7 +3796,7 @@
                               "name": "Icon",
                               "width": 14,
                               "height": 14,
-                              "icon": "mail",
+                              "icon": "x",
                               "library": "lucide",
                               "fill": "$muted"
                             }
@@ -10189,6 +10256,140 @@
                         },
                         {
                           "type": "frame",
+                          "id": "v1Oiwv",
+                          "name": "x.com/igormihalik",
+                          "width": "fill_container",
+                          "cornerRadius": 9,
+                          "stroke": "$border-soft",
+                          "strokeWidth": 1,
+                          "gap": 10,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "zLwhR",
+                              "name": "Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "x",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "XGgN9",
+                              "name": "Text",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 2,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "opb7N",
+                                  "name": "Link",
+                                  "fill": "$text",
+                                  "content": "x.com/igormihalik",
+                                  "fontFamily": "$font-mono",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "M7I0Cu",
+                                  "name": "Sub",
+                                  "fill": "$faint",
+                                  "content": "say hello",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "icon",
+                              "id": "fxTS4",
+                              "name": "Out",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "arrow-up-right",
+                              "library": "lucide",
+                              "fill": "$border"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "v41WF7",
+                          "name": "linkedin.com/in/mihalik",
+                          "width": "fill_container",
+                          "cornerRadius": 9,
+                          "stroke": "$border-soft",
+                          "strokeWidth": 1,
+                          "gap": 10,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "avlw9",
+                              "name": "Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "linkedin",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "MiM7d",
+                              "name": "Text",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 2,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "gtnJy",
+                                  "name": "Link",
+                                  "fill": "$text",
+                                  "content": "linkedin.com/in/mihalik",
+                                  "fontFamily": "$font-mono",
+                                  "fontSize": 11.5,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Ug1CA",
+                                  "name": "Sub",
+                                  "fill": "$faint",
+                                  "content": "the work history",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "icon",
+                              "id": "PYguE",
+                              "name": "Out",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "arrow-up-right",
+                              "library": "lucide",
+                              "fill": "$border"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
                           "id": "lAQIa",
                           "name": "index.xml",
                           "width": "fill_container",
@@ -10245,73 +10446,6 @@
                             {
                               "type": "icon",
                               "id": "SAFqn",
-                              "name": "Out",
-                              "width": 12,
-                              "height": 12,
-                              "icon": "arrow-up-right",
-                              "library": "lucide",
-                              "fill": "$border"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "v1Oiwv",
-                          "name": "igor.mihalik@gmail.com",
-                          "width": "fill_container",
-                          "cornerRadius": 9,
-                          "stroke": "$border-soft",
-                          "strokeWidth": 1,
-                          "gap": 10,
-                          "padding": [
-                            8,
-                            10
-                          ],
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "icon",
-                              "id": "zLwhR",
-                              "name": "Icon",
-                              "width": 14,
-                              "height": 14,
-                              "icon": "mail",
-                              "library": "lucide",
-                              "fill": "$muted"
-                            },
-                            {
-                              "type": "frame",
-                              "id": "XGgN9",
-                              "name": "Text",
-                              "width": "fill_container",
-                              "layout": "vertical",
-                              "gap": 2,
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "id": "opb7N",
-                                  "name": "Link",
-                                  "fill": "$text",
-                                  "content": "igor.mihalik@gmail.com",
-                                  "fontFamily": "$font-mono",
-                                  "fontSize": 11.5,
-                                  "fontWeight": "normal"
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "M7I0Cu",
-                                  "name": "Sub",
-                                  "fill": "$faint",
-                                  "content": "say hello",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 11,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "icon",
-                              "id": "fxTS4",
                               "name": "Out",
                               "width": 12,
                               "height": 12,
