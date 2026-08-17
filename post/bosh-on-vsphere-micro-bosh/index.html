@@ -1,59 +1,70 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BOSH on vSphere (micro Bosh) · Anything about Everything</title>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BOSH on vSphere (micro Bosh) &middot; Anything about Everything</title>
   <meta name="description" content="Recently I spent some time playing with BOSH which is a tool for release engineering, deployment and lifecycle management of large scale distributed services. It is used to manage VMs in AWS and vSphere. The vSphere option seemed to be interesting to me and the idea of having private Cloud Foundry PaaS running locally on private infrastructure was exciting. The BOSH is under heavy development and it&amp;rsquo;s sometimes difficult to make things work easily even if following various tutorials and blogs and I&amp;rsquo;m very thankful to the authors.">
-
-
   <link rel="canonical" href="https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/">
-
-<link rel="stylesheet" href="../../css/page.css">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Anything about Everything">
-<meta property="og:title" content="BOSH on vSphere (micro Bosh)">
-<meta property="og:url" content="https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/">
-
-  <meta property="og:description" content="Recently I spent some time playing with BOSH which is a tool for release engineering, deployment and lifecycle management of large scale distributed services. It is used to manage VMs in AWS and …">
-
-
-  <meta property="article:published_time" content="2012-06-28T00:00:00Z">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BOSH on vSphere (micro Bosh)">
-
-  <meta name="twitter:description" content="Recently I spent some time playing with BOSH which is a tool for release engineering, deployment and lifecycle management of large scale distributed services. It is used to manage VMs in AWS and …">
-
-
-
-
+  <link rel="alternate" type="application/rss+xml" title="Anything about Everything" href="../../index.xml">
+  <link rel="stylesheet" href="../../css/page.css">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Anything about Everything">
+  <meta property="og:url" content="https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/">
+  <meta property="og:title" content="BOSH on vSphere (micro Bosh)">
+  <meta property="article:published_time" content="2012-06-28T10:00:00Z">
+  <meta name="twitter:card" content="summary">
+  <script>
+  /* Applied before paint so the theme never flashes. */
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-
-<header class="site-header">
-  <div class="content header-inner">
-    <a class="site-title" href="../../">Anything about Everything</a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="../../post/index.html" >Archive</a>
-      <a href="https://github.com/igm" rel="me">GitHub</a>
-    </nav>
-  </div>
-</header>
-
-
-<main id="main" class="content">
-  
-  <article class="post">
-    <header class="post-header">
-      <h1>BOSH on vSphere (micro Bosh)</h1>
-      <p class="post-meta">
-        <time datetime="2012-06-28">June 28, 2012</time>
-      </p>
-    </header>
-    <p>Recently I spent some time playing with BOSH which is a tool for <a href="https://github.com/cloudfoundry/bosh" target="_blank">release engineering, deployment and lifecycle management of large scale distributed services</a>. It is used to manage VMs in AWS and vSphere. The vSphere option seemed to be interesting to me and the idea of having private <a href="http://cloudfoundry.org/" target="_blank">Cloud Foundry</a> PaaS running locally on private infrastructure was exciting. The BOSH is under heavy development and it&rsquo;s sometimes difficult to make things work easily even if following various tutorials and <a href="http://drnicwilliams.com/2012/04/16/creating-a-bosh-from-scratch-on-aws/" target="_blank">blogs</a> and I&rsquo;m very thankful to the authors.</p>
+<div class="shell">
+    <aside class="sidebar">
+      <div class="identity">
+        <a class="avatar" href="../../index.html" aria-label="Home">im</a>
+        <div>
+          <div class="identity-name">Igor Mihalik</div>
+          <div class="identity-host">blog.igormihalik.com</div>
+        </div>
+      </div>
+      <p class="sidebar-bio">Notes on Go, distributed systems, and the occasional detour.</p>
+      <nav aria-label="Main">
+        <p class="eyebrow">NAVIGATE</p>
+        <div class="nav-list">
+        <a href="../../index.html" aria-current="page"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18h-9a3 3 0 0 1-3-3V5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v13a3 3 0 0 0 3 3 3 3 0 0 0 3-3V8h-4"/><path d="M7 8h6M7 12h6M7 16h3"/></svg><span>Writing</span></a>
+        <a href="../../post/index.html"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9M10 13h4"/></svg><span>Archive</span></a>
+        <a href="../../post/index.html#topics"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 2.7a2 2 0 0 0-1.4-.6H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8 8a2 2 0 0 0 2.8 0l6.8-6.8a2 2 0 0 0 0-2.8z"/><circle cx="7" cy="7" r="1.2"/></svg><span>Topics</span></a>
+        <a href="https://github.com/igm" rel="me"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg><span>GitHub</span></a>
+        </div>
+      </nav>
+    </aside>
+    <div class="col">
+    <div class="mobilebar">
+      <a class="avatar" href="../../index.html" aria-label="Home">im</a>
+      <a class="title" href="../../index.html">Anything about Everything</a>
+    </div>
+      <div class="topbar">
+        <div class="topbar-row">
+          <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">~</a><span class="sep">/</span><a href="../index.html">writing</a><span class="sep">/</span><span class="here">bosh-on-vsphere-micro-bosh</span></nav>
+          <div class="topbar-actions"><a class="btn" href="../index.html"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> back</a><button class="btn" type="button" data-theme-toggle><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span data-theme-label>theme</span></button></div>
+        </div>
+        <div class="progress"><span></span></div>
+      </div>
+      <main id="main" class="article">
+        <article class="post article-inner">
+          <header class="post-header">
+            <div class="tag-cloud"><a class="tag" href="../../post/index.html#topics">bosh</a><a class="tag" href="../../post/index.html#topics">cloud-foundry</a></div>
+            <h1>BOSH on vSphere (micro Bosh)</h1>
+            <p class="post-meta">
+              <svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> <time datetime="2012-06-28">June 28, 2012</time>
+              <span class="sep">&middot;</span> <svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg> 4 min read
+            </p>
+          </header>
+          <hr class="rule">
+<p>Recently I spent some time playing with BOSH which is a tool for <a href="https://github.com/cloudfoundry/bosh" target="_blank">release engineering, deployment and lifecycle management of large scale distributed services</a>. It is used to manage VMs in AWS and vSphere. The vSphere option seemed to be interesting to me and the idea of having private <a href="http://cloudfoundry.org/" target="_blank">Cloud Foundry</a> PaaS running locally on private infrastructure was exciting. The BOSH is under heavy development and it&rsquo;s sometimes difficult to make things work easily even if following various tutorials and <a href="http://drnicwilliams.com/2012/04/16/creating-a-bosh-from-scratch-on-aws/" target="_blank">blogs</a> and I&rsquo;m very thankful to the authors.</p>
 <h2 id="vsphere-setup">vSphere Setup</h2>
 <p>As an infrastructure I created a cluster of 4 hosts ESXi version 5u1 (esxi1, esxi2, esxi3, esxi4) registered in igmlab.net domain (i.e. esxi1.igmlab.net). All of the hosts were powered by four core CPU wih 16GB of RAM and iSCSI shared storage (IET software based) of 512GB. The internal network had following characteristics: IP range: 192.168.2.0/24, GW/DNS: 192.168.2.107. For <a href="http://www.vmware.com/products/vcenter-server/overview.html" target="_blank">VMware vCenter Server</a> SUSE based VM appliance was used (verion 5.0.0).</p>
 <p>Proper network configuration is crucial for correct deployment. Bosh VMs run as guests in ESXi hosts and they access those hosts directly so both the hosts and guests have to  share the same network. This is also the case for vCenter Server.</p>
@@ -64,7 +75,7 @@
 <!-- <a href="http://1.bp.blogspot.com/-2karvJbVftY/T-x7jufBU_I/AAAAAAAAHXA/1hlRtfY-WzU/s1600/image001.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://1.bp.blogspot.com/-2karvJbVftY/T-x7jufBU_I/AAAAAAAAHXA/1hlRtfY-WzU/s400/image001.png" width="400" /></a>   <a href="http://4.bp.blogspot.com/-uobwxIfuGLs/T-x7nnthoKI/AAAAAAAAHXI/3Cc42WtR5ig/s1600/image003.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://4.bp.blogspot.com/-uobwxIfuGLs/T-x7nnthoKI/AAAAAAAAHXI/3Cc42WtR5ig/s400/image003.png" width="400" /></a>  <a href="http://4.bp.blogspot.com/-h0f5TNAUTf4/T-x7wp00aDI/AAAAAAAAHXY/leiMecqlMJA/s1600/image005.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://4.bp.blogspot.com/-h0f5TNAUTf4/T-x7wp00aDI/AAAAAAAAHXY/leiMecqlMJA/s400/image005.png" width="400" /></a>   <a href="http://1.bp.blogspot.com/-ZwTIKafeAKo/T-x7zTts_2I/AAAAAAAAHXg/33Lm4S3Sj34/s1600/image007.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="http://1.bp.blogspot.com/-ZwTIKafeAKo/T-x7zTts_2I/AAAAAAAAHXg/33Lm4S3Sj34/s400/image007.png" width="400" /></a>   -->
 <h2 id="micro-bosh">Micro Bosh</h2>
 <p>To deploy Bosh you need Bosh. It&rsquo;s kind of like to get a compiler you need to compile one first. Luckily there&rsquo;s a special one called &ldquo;micro Bosh&rdquo; and it can be installed by Bosh CLI addon called Bosh Deployer. So first things first, let&rsquo;s start with <a href="http://rubygems.org/gems/bosh_cli" target="_blank">Bosh CLI</a>. The current version at the time of writing is 0.9.14. Ruby people should not have any problems installing it via <code>gem install bosh_cli</code>. More detailed instructions are <a href="https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#installing-bosh-command-line-interface" target="_blank">here</a>. The next step is to install <a href="https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#bosh-installation" target="_blank">Bosh Deployer</a>. For trouble-less installation <a href="http://releases.ubuntu.com/lucid/" target="_blank">Ubuntu 10.04.4 LTS Server</a> is suggested. The steps:</p>
-<pre><code>$ gem install bosh_cli
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre><code>$ gem install bosh_cli
 $ git clone https://github.com/cloudfoundry/bosh.git
 $ cd bosh/deployer
 $ bundle install
@@ -87,18 +98,18 @@ Micro
                             persistent disk) 
   micro agent &lt;args&gt;        Send agent messages 
   micro apply &lt;spec&gt;        Apply spec
-</code></pre>
+</code></pre></div>
 <p>Next we need micro bosh <a href="https://github.com/cloudfoundry/oss-docs/blob/master/bosh/documentation/documentation.md#deployments" target="_blank">deployment</a> manifest. In the manifest the deployment configuration is stored. The defaults for vSphere can be found in the <a href="https://github.com/cloudfoundry/bosh/blob/master/deployer/config/vsphere_defaults.yml" target="_blank">repository</a> and the manifest for micro Bosh deployment looks like this:</p>
 <script src="https://gist.github.com/3002576.js?file=micro_bosh.yml">
 </script> 
 <p>We need to create deployments directory to store our deployment manifest files.</p>
-<pre>$ mkdir -p ~/deployments/micro
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre>$ mkdir -p ~/deployments/micro
 $ cd ~/deployments/micro
 $ vim micro_bosh.yml
 $ ... copy and update the content of bosh_micro.yml file
-</pre>
+</pre></div>
 <p>Micro Bosh Stemcell is a VM template that will be used for our deployment. Deployment manifests define the details that are configured in the VM so that all the network configuration is set properly. It also contains details about the vSphere setup, vCenter connection parameters, resource parameters for VM etc. To get a full list of available Bosh stemcells run:</p>
-<pre>$ bosh public stemcells
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre>$ bosh public stemcells
 +---------------------------------+-------------------------------------------------------+
 | Name                            | Url                                                   |
 +---------------------------------+-------------------------------------------------------+
@@ -112,14 +123,14 @@ $ ... copy and update the content of bosh_micro.yml file
 | micro-bosh-stemcell-0.1.0.tgz   | https://blob.cfblob.com/rest/objects/4e4e78bca51e1... |
 +---------------------------------+-------------------------------------------------------+
 To download use 'bosh download public stemcell <stemcell_name>'.For full url use --full.
-</stemcell_name></pre>
+</stemcell_name></pre></div>
 <p>At this moment we are interested in micro stemcell (micro-bosh-stemcell-0.1.0.tgz) and we need to download it:</p>
-<pre>$ mkdir -p ~/stemcells
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre>$ mkdir -p ~/stemcells
 $ cd ~/stemcells
 $ bosh download public stemcell micro-bosh-stemcell-0.1.0.tgz 
-</pre>
+</pre></div>
 <p>As soon as we have required stemcell and manifest we can start the deployment procedure:</p>
-<pre>$ cd ~/deployments
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre>$ cd ~/deployments
 $ bosh micro deployment micro
 $ bosh micro deploy ~/stemcells/micro-bosh-stemcell-0.1.0.tgz
 Deploying new micro BOSH instance `micro/micro_bosh.yml' to `micro' (type 'yes' to continue): yes
@@ -148,12 +159,12 @@ Deploy Micro BOSH
   waiting for the director (00:00:49)                                           
 Done             11/11 00:20:41                                                 
 Deployed `micro/micro_bosh.yml' to `micro', took 00:20:41 to complete
-</pre>
+</pre></div>
 <p>Entire process takes several minutes (~20 minutes in my case):</p>
 <img src="../../images/bosh-on-vsphere-(micro-bosh)/image009.png" width="400px" class="fancybox">
 <p>Now we can target the micro bosh and login with default admin/admin:</p>
 <img src="../../images/bosh-on-vsphere-(micro-bosh)/image011.png" width="400px" class="fancybox"/>
-<pre>$ bosh target 192.168.2.120:25555
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre>$ bosh target 192.168.2.120:25555
 $ bosh status
 Updating director data... done
 
@@ -161,20 +172,65 @@ Target         micro (http://192.168.2.120:25555) Ver: 0.4 (00000000)
 UUID           a5d6347d-3b66-465f-ae06-2444db70dce3
 User           admin
 Deployment     not set
-</pre>
+</pre></div>
 <p>You should also be able to ssh to the micro Bosh:</p>
-<pre>$ ssh root@192.168.2.120
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre>$ ssh root@192.168.2.120
 root@192.168.2.120's password: vmware
-</pre>
+</pre></div>
 <p>The password &lsquo;vmware&rsquo; is what we provided in our manifest in env:bosh:password. You can also generate hash for custom password:</p>
-<pre>$ mkpasswd -m sha-512
-</pre>
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre>$ mkpasswd -m sha-512
+</pre></div>
 <p>and use it instead before deploying micro Bosh. And if you think this is all you wanted to do you can delete the deployment:</p>
-<pre>$ bosh micro delete
-</pre>
-  </article>
-  
-<script>
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre>$ bosh micro delete
+</pre></div>
+        </article>
+      </main>
+    </div>
+    <aside class="rail">
+      <section>
+        <p class="rail-head eyebrow">ON THIS PAGE</p>
+        <nav class="toc"><a class="" href="#vsphere-setup">vSphere Setup</a><a class="" href="#micro-bosh">Micro Bosh</a></nav>
+      </section>
+      <section>
+        <p class="rail-head eyebrow">NEXT</p>
+        <div class="updown"><a href="../golang/index.html"><span class="dir"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg> NEWER<span class="when">2012.09.06</span></span><b>go get...</b></a><div class="spent"><span class="dir"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg> OLDER</span><b>&mdash; that&rsquo;s the whole archive</b></div></div>
+      </section>
+      <div class="sidebar-spacer"></div>
+      <section>
+        <p class="rail-head eyebrow">SHARE</p>
+        <div class="share"><a href="https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/" title="Permalink"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></a><a href="mailto:?subject=BOSH%20on%20vSphere%20(micro%20Bosh)&amp;body=https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/" title="Share by mail"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a><a href="../../index.xml" title="RSS"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5"/></svg></a></div>
+      </section>
+    </aside>
+  </div>
+  <nav class="bottomnav" aria-label="Sections">
+      <div class="progress"><span></span></div>
+      <ul>
+        <li><a href="../../index.html" aria-current="page"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18h-9a3 3 0 0 1-3-3V5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v13a3 3 0 0 0 3 3 3 3 0 0 0 3-3V8h-4"/><path d="M7 8h6M7 12h6M7 16h3"/></svg><span>Writing</span></a></li>
+        <li><a href="../../post/index.html"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9M10 13h4"/></svg><span>Archive</span></a></li>
+        <li><a href="../../post/index.html#topics"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 2.7a2 2 0 0 0-1.4-.6H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8 8a2 2 0 0 0 2.8 0l6.8-6.8a2 2 0 0 0 0-2.8z"/><circle cx="7" cy="7" r="1.2"/></svg><span>Topics</span></a></li>
+        <li><a href="https://github.com/igm"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>About</span></a></li>
+      </ul>
+    </nav>
+  <script>
+  /* Copy-to-clipboard for code blocks. */
+  (function () {
+    [].forEach.call(document.querySelectorAll('.codebar .copy'), function (btn) {
+      btn.addEventListener('click', function () {
+        var pre = btn.closest('.codeblock').querySelector('pre');
+        navigator.clipboard.writeText(pre.innerText).then(function () {
+          btn.dataset.done = '1';
+          btn.querySelector('span').textContent = 'copied';
+          setTimeout(function () {
+            btn.dataset.done = '';
+            btn.querySelector('span').textContent = 'copy';
+          }, 1200);
+        });
+      });
+    });
+  })();
+  </script>
+  <script>
+  /* Vanilla lightbox: clicks on post images open a native <dialog>. */
   (function () {
     'use strict';
     var post = document.querySelector('.post');
@@ -189,12 +245,6 @@ root@192.168.2.120's password: vmware
     dlg.insertBefore(img, dlg.firstChild);
     document.body.appendChild(dlg);
 
-    function open(src, alt) {
-      img.src = src;
-      img.alt = alt || '';
-      dlg.showModal();
-    }
-
     dlg.addEventListener('click', function (e) {
       if (e.target === dlg || e.target.closest('.lightbox-close')) dlg.close();
     });
@@ -203,19 +253,36 @@ root@192.168.2.120's password: vmware
       var el = e.target;
       if (el.tagName !== 'IMG') return;
       var a = el.closest('a');
-      if (a && a.getAttribute('href') !== el.src) return;  
+      if (a && a.getAttribute('href') !== el.src) return;
       e.preventDefault();
-      open(el.currentSrc || el.src, el.alt);
+      img.src = el.currentSrc || el.src;
+      img.alt = el.alt || '';
+      dlg.showModal();
     });
   })();
-</script>
-</main>
-
-<footer class="site-footer">
-  <div class="content">
-    <p>© 2026 Igor Mihalik</p>
-  </div>
-</footer>
-
+  </script>
+<script>
+  /* Theme toggle — the only site-wide script. */
+  (function () {
+    var root = document.documentElement;
+    function current() {
+      return root.dataset.theme ||
+        (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    }
+    function label() {
+      var v = current();
+      [].forEach.call(document.querySelectorAll('[data-theme-label]'), function (el) { el.textContent = v; });
+    }
+    [].forEach.call(document.querySelectorAll('[data-theme-toggle]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        label();
+      });
+    });
+    label();
+  })();
+  </script>
 </body>
 </html>
