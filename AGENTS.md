@@ -3,9 +3,10 @@
 Guidance for AI agents working in this repo.
 
 **Read [README.md](README.md) first.** It is the source of truth for what this
-site is, how to add a post, how unlisted posts work, the repo layout, the design
-system, and how deployment works. Everything below is the extra context an agent
-needs that the README does not cover — the invariants that are easy to break.
+site is, how to add a post, how off-index posts work, the repo layout, the
+design system, and how deployment works. Everything below is the extra context
+an agent needs that the README does not cover — the invariants that are easy to
+break.
 Do not restate README content here; if something changes, update the README and
 leave this file pointing at it.
 
@@ -37,17 +38,30 @@ There is **no static site generator and no build step**. Every `.html` file in
 
 ## Traps specific to this repo
 
-- **Some posts are deliberately unlisted.** An unlisted post is missing from
-  `index.html`, `post/index.html`, `index.xml` and `sitemap.xml`, and is left out
-  of the counts. That looks like a bug or a forgotten entry. It is not. Before
-  adding any post to a listing or a count, check whether it is unlisted:
+- **Some posts are deliberately off-index** — `draft` or `unlisted`. Such a
+  post is missing from `index.html`, `post/index.html`, `index.xml` and
+  `sitemap.xml`, and its date-neighbours' NEWER/OLDER cards skip straight over
+  it. That looks like a bug or a forgotten entry. It is not. Before adding any
+  post to a listing or a count, check whether it is off-index:
 
   ```sh
-  grep -rl 'name="robots"' post/     # every intentionally unlisted post
+  for f in post/*/index.html; do
+    case "$f" in post/_template/*|post/hidden/*) continue;; esac
+    s=$(sed -n 's/.*name="post-status" content="\([a-z]*\)".*/\1/p' "$f")
+    [ -n "$s" ] && printf '%-9s /%s/\n' "$s" "$(dirname "$f")"
+  done
   ```
 
-  The `noindex` meta is the marker, so the answer is always in the files rather
-  than in this document. See *Unlisted posts* in the README.
+  The `post-status` meta is the marker, so the answer is always in the files
+  rather than in this document. See *Off-index posts* in the README.
+- **`post/hidden/index.html` is a fourth listing to keep in sync** — and the
+  only one an off-index post *should* appear in. It is linked from nothing by
+  design, so it looks like an orphan; an agent tidying up "a page linked from
+  nowhere" would delete exactly the wrong file. Don't.
+- **`post/_template/index.html` carries the marker lines inside a comment**,
+  and grep cannot tell comments from code — it must never be counted as an
+  off-index post. The loop above skips it (and `post/hidden/`, the index
+  itself) for exactly that reason.
 - **Posts are not structurally uniform.** Some carry their own `<style>` and
   `<script>` blocks and bespoke classes with full-bleed layouts, and their
   scripts may live *outside* `<article>`. Bulk transforms that assume the
