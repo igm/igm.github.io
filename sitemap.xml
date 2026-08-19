@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://blog.igormihalik.com/</loc></url>
+  <url><loc>https://blog.igormihalik.com/post/</loc></url>
+  <url><loc>https://blog.igormihalik.com/post/bosh-on-vsphere-micro-bosh/</loc></url>
+  <url><loc>https://blog.igormihalik.com/post/coffee-driven-development/</loc></url>
+  <url><loc>https://blog.igormihalik.com/post/go-applications-and-cloud-foundry/</loc></url>
+  <url><loc>https://blog.igormihalik.com/post/golang/</loc></url>
+  <url><loc>https://blog.igormihalik.com/post/sockjs-for-go/</loc></url>
+  <url><loc>https://blog.igormihalik.com/post/sockjs-for-go-ii-lessons-learned/</loc></url>
+  <url><loc>https://blog.igormihalik.com/post/sockjs-for-go-iii-yet-another-take/</loc></url>
+</urlset>
