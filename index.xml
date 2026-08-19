@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Anything about Everything</title>
+    <title>Written Slowly</title>
     <link>https://blog.igormihalik.com/</link>
     <description>Notes on Go, Cloud Foundry, BOSH and other software adventures.</description>
     <language>en-us</language>
