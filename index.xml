@@ -5,8 +5,14 @@
     <link>https://blog.igormihalik.com/</link>
     <description>Notes on Go, Cloud Foundry, BOSH and other software adventures.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Aug 2026 18:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2026 18:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.igormihalik.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Veľký Choč</title>
+      <link>https://blog.igormihalik.com/post/velky-choc/</link>
+      <guid>https://blog.igormihalik.com/post/velky-choc/</guid>
+      <pubDate>Wed, 02 Sep 2026 10:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Coffee-Driven Development</title>
       <link>https://blog.igormihalik.com/post/coffee-driven-development/</link>
