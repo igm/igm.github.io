@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Návrh vylepšení &middot; spokojnavpraci.sk</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --coral: #F15B4E;      /* brand z originálu (241,91,78) */
+      --coral-dark: #d4463a;
+      --navy: #000166;       /* brand z originálu (0,1,102) */
+      --yellow: #FFCD10;     /* brand z originálu (255,205,16) */
+      --ink: #191919;
+      --muted: #555;
+      --bg: #FDF9F8;         /* svetlá krémová, blízko originál 243,236,235 */
+      --card: #ffffff;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    .wrap { max-width: 56rem; margin: 0 auto; padding: 0 1.25rem; }
+    header.hero {
+      background: linear-gradient(160deg, var(--navy) 0%, #1a1a80 70%, #2b2b9e 100%);
+      color: #fff; padding: 3.5rem 0 3rem;
+    }
+    header.hero h1 {
+      font: italic 700 2.2rem/1.2 "DM Serif Display", Georgia, serif;
+      margin: 0 0 .5rem; max-width: 46rem;
+    }
+    header.hero h1 em { color: var(--yellow); font-style: italic; }
+    header.hero p.sub { font-size: 1.15rem; opacity: .92; max-width: 40rem; margin: .25rem 0 1.5rem; }
+    .badge { display: inline-block; background: var(--yellow); color: var(--navy);
+      font-weight: 700; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase;
+      padding: .3rem .8rem; border-radius: 999px; margin-bottom: 1rem; }
+    .cta-row { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: .8rem 1.5rem; border-radius: 999px;
+      font-weight: 700; text-decoration: none; border: 2px solid transparent; }
+    .btn.primary { background: var(--coral); color: #fff; }
+    .btn.primary:hover { background: var(--coral-dark); }
+    .btn.ghost { border-color: rgba(255,255,255,.6); color: #fff; }
+    .btn.ghost:hover { border-color: #fff; }
+    .trust { margin-top: 1rem; font-size: .9rem; opacity: .85; }
+    section { padding: 2.75rem 0; }
+    h2 { font: italic 700 1.6rem/1.25 "DM Serif Display", Georgia, serif;
+      color: var(--navy); margin: 0 0 1rem; }
+    h3 { font-size: 1.05rem; margin: 0 0 .35rem; color: var(--navy); }
+    .cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+    .card { background: var(--card); border-radius: 14px; padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .card .who { font-weight: 700; color: var(--coral); font-size: .85rem;
+      text-transform: uppercase; letter-spacing: .05em; }
+    .card p { margin: .4rem 0 0; color: var(--muted); font-size: .95rem; }
+    .persona p { color: var(--ink); }
+    .persona .q { font-style: italic; }
+    details { background: var(--card); border-radius: 10px; margin-bottom: .5rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+    summary { cursor: pointer; padding: .8rem 1rem; font-weight: 600; list-style: none; }
+    summary::before { content: "+ "; color: var(--coral); font-weight: 700; }
+    details[open] summary::before { content: "– "; }
+    details .body { padding: 0 1rem .9rem 2rem; color: var(--muted); font-size: .95rem; }
+    .lesson { display: flex; gap: .7rem; align-items: baseline; }
+    .lesson .n { color: var(--coral); font-weight: 700; min-width: 1.6rem; }
+    .quote { border-left: 4px solid var(--yellow); background: var(--card);
+      border-radius: 0 12px 12px 0; padding: 1rem 1.25rem; margin: 0 0 1rem; }
+    .quote p { margin: 0 0 .5rem; font-style: italic; }
+    .quote .by { font-style: normal; font-weight: 700; font-size: .9rem; color: var(--muted); }
+    .email-capture { background: var(--navy); color: #fff; border-radius: 16px;
+      padding: 2rem; text-align: center; }
+    .email-capture h2 { color: #fff; }
+    .email-capture p { opacity: .9; margin-top: 0; }
+    form { display: flex; gap: .5rem; max-width: 28rem; margin: 0 auto; flex-wrap: wrap; }
+    input[type=email] { flex: 1 1 14rem; padding: .8rem 1rem; border-radius: 999px;
+      border: none; font-size: 1rem; }
+    button { padding: .8rem 1.6rem; border-radius: 999px; border: none;
+      background: var(--coral); color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; }
+    button:hover { background: var(--coral-dark); }
+    .findings { counter-reset: f; }
+    .finding { display: flex; gap: .9rem; padding: .8rem 0;
+      border-bottom: 1px dashed rgba(0,0,0,.12); }
+    .finding:last-child { border-bottom: none; }
+    .finding::before { counter-increment: f; content: counter(f);
+      background: var(--coral); color: #fff; font-weight: 700; border-radius: 50%;
+      min-width: 1.7rem; height: 1.7rem; display: flex; align-items: center;
+      justify-content: center; font-size: .85rem; margin-top: .15rem; }
+    .finding b { color: var(--navy); }
+    .finding p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .kicker { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem;
+      font-weight: 700; color: var(--coral); margin: 0 0 .3rem; }
+    footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .85rem;
+      text-align: center; }
+    .note { background: #fff8dc; border: 1px solid #efe2a0; border-radius: 10px;
+      padding: .8rem 1rem; font-size: .9rem; color: #6b5d1f; margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">Návrh redesignu &middot; nepublikovaný koncept</span>
+    <h1>Ako objaviť a získať prácu, <em>ktorú chceš</em></h1>
+    <p class="sub">15-týždňový online kurz (nielen) pre mamy &mdash; od sebapoznania
+      cez životopis až po vyjednávanie. Podpora komunity žien, ktoré to zaria
+      idú tou istou cestou.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#prihlaska">Chcem info o ďalšom turnuse</a>
+      <a class="btn ghost" href="#osnova">Pozriť 15 lekcií</a>
+    </div>
+    <p class="trust">★ 4,9 / 5 podľa absolventiek &middot; 500+ mám prešlo kurzom
+      &middot; kurz vedú skúsené lektorky</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="vysledky">
+    <p class="kicker">Zmena hore</p>
+    <h2>Hero sekcia: jasný sľub + dôkaz hneď v prvom zobrazení</h2>
+    <p>Originál začína dlhým príbehom Silvie, ktorý sa objaví až po niekoľkých
+      obrazovkách. Návštyvníčka má za 5 sekúnd vedieť: <b>čo kurz je, pre koho je
+      a čo má urobiť</b>. Príbehy presunieme nižšie, kde fungujú ako dôkaz.</p>
+  </section>
+
+  <section id="prekoho">
+    <p class="kicker">Pre koho kurz je</p>
+    <h2>Tri príbehy ako karty &mdash; návštevníčka sa nájde</h2>
+    <div class="cards">
+      <div class="card persona">
+        <span class="who">Končím materskú</span>
+        <h3>Silvia</h3>
+        <p class="q">&bdquo;Už len z pomyslenia na prácu mám ťažko v žalúdku.
+          Neviem, ako to všetko popri deťoch zvládnem &mdash; a kto ma po rokoch
+          zamestná?&ldquo;</p>
+      </div>
+      <div class="card persona">
+        <span class="who">Práca už nebaví</span>
+        <h3>Mária</h3>
+        <p class="q">&bdquo;Práca ma predtým bavila, dnes to nie je ono. Mám ostať,
+          alebo ísť inam? A ak odísť, tak kam?&ldquo;</p>
+      </div>
+      <div class="card persona">
+        <span class="who">Cítim sa nevyužitá</span>
+        <h3>Lucia</h3>
+        <p class="q">&bdquo;Deti sú v škole, nastup do práce som zvládla, ale cítim
+          sa nevyužitá. Neviem, ako na zmenu &mdash; a či si ju môžem dovoliť.&ldquo;</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="osnova">
+    <p class="kicker">Čo ťa čaká</p>
+    <h2>15 lekcií v skladacom zozname &mdash; prehľad na prvý pohľad</h2>
+    <details open>
+      <summary><span class="lesson"><span class="n">1–4</span> Sebaspoznanie: kto som, moje talenty, čo chcem, výber smeru</span></summary>
+      <div class="body">Kto som? Aké sú moje talenty? Čo chcem a potrebujem?
+        Ako si vybrať pracovný smer, keď ma baví viacero oblastí (návod pre
+        multipotenciálky).</div>
+    </details>
+    <details>
+      <summary><span class="lesson"><span class="n">5–7</span> Odmena, balans a rozhodnutie</span></summary>
+      <div class="body">Za koľko chcem pracovať a ako si pýtať adekvátnu odmenu.
+        Balans medzi rodinou a prácou. Sumarizácia a prvé rozhodovanie.</div>
+    </details>
+    <details>
+      <summary><span class="lesson"><span class="n">8</span> Týždeň na dobehnutie</span></summary>
+      <div class="body">Rezerva na doladenie predchádzajúcich lekcií a dobitie energie.</div>
+    </details>
+    <details>
+      <summary><span class="lesson"><span class="n">9–11</span> Prekážky, sabotéri a hľadanie príležitostí</span></summary>
+      <div class="body">Čo mi stojí v ceste, ako pracovať so sabotérmi a ako hľadať
+        pracovné príležitosti netradičnými technikami, ktoré fungujú.</div>
+    </details>
+    <details>
+      <summary><span class="lesson"><span class="n">12–15</span> Životopis, pohovor, komunikácia, vyjednávanie</span></summary>
+      <div class="body">Pútavý životopis, sebaprezentácia na pohovore, asertívna
+        a rešpektujúca komunikácia a techniky vyjednávania (nielen) na pohovore.</div>
+    </details>
+  </section>
+
+  <section id="ai">
+    <p class="kicker">Novinka</p>
+    <h2>Praktická AI ako súčasť kurzu</h2>
+    <div class="cards">
+      <div class="card"><h3>🤖 Vysvetlené ľudsky</h3><p>Ako AI funguje v praxi &mdash;
+        aj pre ženy, ktoré sa jej doteraz vyhýbali.</p></div>
+      <div class="card"><h3>📄 AI ako asistent</h3><p>Zosumarizuje dokumenty, pomôže
+        s plánovaním aj s každodennými úlohami.</p></div>
+      <div class="card"><h3>💼 AI v kariére</h3><p>Pripraví ťa na pohovor, pomôže
+        so životopisom a LinkedIn profilom.</p></div>
+    </div>
+  </section>
+
+  <section id="referencie">
+    <p class="kicker">Referencie</p>
+    <h2>Absolventky hovoria</h2>
+    <blockquote class="quote"><p>&bdquo;Mám pocit, že týmto kurzom by mali prejsť
+      všetky mamy končiace rodičovskú dovolenku &mdash; je tam veľa užitočných
+      informácií!&ldquo;</p>
+      <cite class="by">Nika Kavková</cite></blockquote>
+    <blockquote class="quote"><p>&bdquo;Kurz mi otvoril oči, myseľ aj dvere do nového
+      pracovného sveta. Podarilo sa mi nájsť prácu, ktorú mám rada &mdash; a do kurzu
+      som vstupovala ako nezamestnaná!&ldquo;</p>
+      <cite class="by">Katarína Majdová Sirotová</cite></blockquote>
+    <blockquote class="quote"><p>&bdquo;Som spokojnejšia a šťastnejšia a vidieť to aj
+      na rodine. Boli to najlepšie investované peniaze!&ldquo;</p>
+      <cite class="by">Miroslava Leľová Želizňaková</cite></blockquote>
+    <p><a href="https://www.spokojnavpraci.sk/referencie">Všetky referencie &rarr;</a></p>
+  </section>
+
+  <section id="prihlaska">
+    <div class="email-capture">
+      <h2>Prihlasovanie je momentálne uzavreté</h2>
+      <p>Nechaj nám e-mail a pošleme ti info hneď, ako otvoríme ďalší turnus.
+        Žiadny spam, len termín a detaily.</p>
+      <form action="#" method="post" onsubmit="return false">
+        <input type="email" name="email" placeholder="tvoj@email.sk"
+          aria-label="E-mailová adresa" required>
+        <button type="submit">Chcem vedieť</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="najdene" class="findings">
+    <p class="kicker">Analýza originálu</p>
+    <h2>Čo sme našli a čo návrh rieši</h2>
+
+    <div class="finding"><p><b>Výkon / 2,4 MB HTML.</b> Stránka je na Wixe: 66
+      &lt;script&gt; tagov, 165 @font-face blokov,first render trvá dlho. Tento koncept má
+      &lt;15 KB, nula externých závislostí a je čitateľný aj na pomalom mobile.</p></div>
+
+    <div class="finding"><p><b>Hero bez jasného CTA.</b> Návštevníčka sa musí
+      dopracovať k ponuke sama. Návrh dáva sľub, dôveru (hodnotenie, počet
+      absolventiek) a tlačidlo hneď do prvej obrazovky.</p></div>
+
+    <div class="finding"><p><b>Príbehy ako stena textu.</b> Silvia, Mária a Lucia
+      sú silný príbeh, ale ako 6 odsekov pôsobia ako blog. Ako 3 karty sa návštevníčka
+      nájde sama do jednej z nich.</p></div>
+
+    <div class="finding"><p><b>15 lekcií ako dlhý zoznam.</b> Scrollovacia stena.
+      Skladací zoznam (details/summary, bez JS) dáva prehľad a záujemkyňa si
+      otvorí detaily podľa záujmu.</p></div>
+
+    <div class="finding"><p><b>Uzatvorené prihlasovanie bez hodnoty.</b> Keď je kurz
+      zatvorený, stránka pôsobí mŕtvo. Zostáva tu len zber e-mailov &mdash; ale
+      zdôraznený a s jasným benefitom (&bdquo;pošleme termín&ldquo;), nie ako sklamání.</p></div>
+
+    <div class="finding"><p><b>SEO štruktúra.</b> Chýba Course structured data
+      (schema.org), takže kurz sa nezobrazuje ako bohatý výsledok v Google.
+      Titulok &bdquo;Kurz SPOKOJNÁ V PRÁCI&ldquo; by mohol niesť kľúčové frázy
+      (&bdquo;online kurz pre mamy po materskej&ldquo;).</p></div>
+
+    <div class="finding"><p><b>og:image 2500&times;1869.</b> Sociálne siete ho
+      orežú nepredvídateľne. Ideál je 1200&times;630 s textom titulku kurz.</p></div>
+
+    <div class="finding"><p><b>Prístupnosť.</b> Kontrast svetlo-ružová na bielom je
+      pod WCAG AA, menu potrebuje &bdquo;Use tab to navigate&ldquo; hint. Návrh
+      používa kontrastné farby a natívne HTML prvky (details, form), ktoré sú
+      prístupné zadarmo.</p></div>
+  </section>
+
+  <div class="note">Toto je <b>nepublikovaný koncept</b> v adresári
+    <code>/stuff/</code> &mdash; nie je prepojený s blogom ani feedmi. Farby
+    a typografia vychádzajú z brandu spokojnavpraci.sk (korál #F15B4E, navy
+    #000166, žltá #FFCD10, DM Serif Display + Poppins). Obsah je prevzatý
+    z verejnej stránky a slúži len ako návrh.</div>
+
+</main>
+
+<footer>
+  Návrh pripravený v sandboxe &mdash; nepublikovaný koncept
+</footer>
+
+</body>
+</html>
