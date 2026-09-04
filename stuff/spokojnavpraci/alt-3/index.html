@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alternatíva 3 &middot; Pastel gradient &middot; spokojnavpraci.sk</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* Variant C: svetlá, mladistvá — fialovo-ružové gradienty, veľké rádiusy. */
+    :root { --bg:#f6f3ff; --ink:#2a2140; --muted:#6f6790; --vio:#7c5cff;
+      --pink:#ff6fb5; --card:#ffffff; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.7 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .wrap { max-width:60rem; margin:0 auto; padding:0 1.3rem; }
+    header { padding:3rem 0 3.4rem; text-align:center;
+      background:linear-gradient(135deg, var(--vio) 0%, #a06bff 45%, var(--pink) 100%);
+      color:#fff; border-radius:0 0 28px 28px; }
+    .badge { display:inline-block; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.45);
+      padding:.3rem .9rem; border-radius:999px; font-size:.8rem; font-weight:700; }
+    h1 { font-size:clamp(2rem, 5.5vw, 3.2rem); line-height:1.12; margin:1rem auto .8rem;
+      max-width:38rem; letter-spacing:-.01em; }
+    .sub { opacity:.95; max-width:34rem; margin:0 auto 1.7rem; font-size:1.1rem; }
+    .cta { display:inline-block; background:#fff; color:var(--vio); font-weight:800;
+      padding:.95rem 2rem; border-radius:999px; text-decoration:none;
+      box-shadow:0 8px 24px rgba(42,33,64,.25); }
+    .cta:hover { transform:translateY(-2px); }
+    .trust { margin-top:1rem; font-size:.9rem; opacity:.9; }
+    section { padding:2.6rem 0; }
+    h2 { text-align:center; font-size:1.7rem; letter-spacing:-.01em; margin:0 0 .3rem; }
+    .h2sub { text-align:center; color:var(--muted); margin:0 auto 1.8rem; max-width:32rem; }
+    .cards { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); }
+    .card { background:var(--card); border-radius:20px; padding:1.5rem;
+      box-shadow:0 10px 30px rgba(124,92,255,.10); }
+    .card .emo { font-size:1.7rem; }
+    .card .who { color:var(--pink); font-weight:800; font-size:.78rem; letter-spacing:.1em;
+      text-transform:uppercase; }
+    .card h3 { margin:.25rem 0 .3rem; font-size:1.15rem; }
+    .card p { margin:0; color:var(--muted); font-size:.95rem; }
+    .steps { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(10rem,1fr)); }
+    .step { background:var(--card); border-radius:20px; padding:1.3rem; text-align:center;
+      box-shadow:0 10px 30px rgba(124,92,255,.10); }
+    .step .n { display:inline-flex; width:2.2rem; height:2.2rem; border-radius:50%;
+      align-items:center; justify-content:center; color:#fff; font-weight:800;
+      background:linear-gradient(135deg, var(--vio), var(--pink)); margin-bottom:.5rem; }
+    .step b { display:block; font-size:.98rem; }
+    .step span { color:var(--muted); font-size:.85rem; }
+    .quote { background:var(--card); border-radius:20px; padding:1.4rem 1.6rem; margin:0 0 1rem;
+      box-shadow:0 10px 30px rgba(124,92,255,.10); max-width:44rem; margin-left:auto; margin-right:auto; }
+    .quote p { margin:0 0 .5rem; font-size:1.02rem; }
+    .quote p::before { content:"💬 "; }
+    .quote .by { color:var(--vio); font-weight:700; font-size:.88rem; }
+    .signup { background:linear-gradient(135deg, var(--vio), var(--pink)); color:#fff;
+      border-radius:26px; padding:2.4rem 1.6rem; text-align:center; }
+    .signup h2 { color:#fff; }
+    .signup p { opacity:.95; max-width:30rem; margin:0 auto; }
+    form { display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:1.3rem; }
+    input { flex:1 1 14rem; max-width:20rem; padding:.95rem 1.2rem; border-radius:999px;
+      border:none; font-size:1rem; }
+    button { background:#fff; color:var(--vio); border:none; border-radius:999px;
+      padding:.95rem 1.9rem; font-weight:800; font-size:1rem; cursor:pointer; }
+    button:hover { transform:translateY(-2px); }
+    footer { padding:2rem 0 3rem; text-align:center; color:var(--muted); font-size:.85rem; }
+    footer a { color:var(--vio); font-weight:700; text-decoration:none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="badge">koncept C &mdash; pastel gradient ✨</span>
+    <h1>Nájdi prácu, ktorá ťa <br>bude baviť 💜</h1>
+    <p class="sub">15-týždňový online kurz (nielen) pre mamy. Krok za krokom
+      &mdash; a v komunite žien, ktoré to idú s tebou.</p>
+    <a class="cta" href="#prihlaska">Chcem vedieť termín 🎯</a>
+    <p class="trust">⭐ 4,9 / 5 &middot; stovky spokojných absolventiek</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2>Ktorá si ty?</h2>
+    <p class="h2sub">Tri ženy, tri príbehy &mdash; možno sa v jednom nájdeš.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="emo">🍼</span>
+        <span class="who">Končím materskú</span>
+        <h3>Silvia</h3>
+        <p>&bdquo;Kto ma po rokoch zamestná? Ako to popri deťoch zvládnem?&ldquo;</p>
+      </div>
+      <div class="card">
+        <span class="emo">🥱</span>
+        <span class="who">Práca už nebaví</span>
+        <h3>Mária</h3>
+        <p>&bdquo;Mám ostať, alebo ísť inam? A ak odísť, tak kam?&ldquo;</p>
+      </div>
+      <div class="card">
+        <span class="emo">🌱</span>
+        <span class="who">Cítim sa nevyužitá</span>
+        <h3>Lucia</h3>
+        <p>&bdquo;Zmena by som chcela, ale netuším, ako na to.&ldquo;</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ako to pôjde 💪</h2>
+    <p class="h2sub">15 lekcií, každý týždeň jedna. Plus 5 live stretnutí a komunita.</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><b>Poznaj sa</b>
+        <span>talenty, potreby, smer</span></div>
+      <div class="step"><span class="n">2</span><b>Stanov cenu</b>
+        <span>odmena, balans</span></div>
+      <div class="step"><span class="n">3</span><b>Zvládni prekážky</b>
+        <span>sabotéri, strachy</span></div>
+      <div class="step"><span class="n">4</span><b>Nájdi prácu</b>
+        <span>životopis, pohovor</span></div>
+      <div class="step"><span class="n">5</span><b>Vyjednaj si</b>
+        <span>asertivita, podmienky</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ony to dokázali 🎉</h2>
+    <blockquote class="quote">
+      <p>Najlepšie investované peniaze. Som spokojnejšia a šťastnejšia a vidieť
+        to na celej rodine!</p>
+      <span class="by">Miroslava L. Ž.</span>
+    </blockquote>
+    <blockquote class="quote">
+      <p>Podarilo sa mi nájsť prácu, ktorú mám rada &mdash; a do kurzu som
+        vstupovala ako nezamestnaná.</p>
+      <span class="by">Katarína M. S.</span>
+    </blockquote>
+  </section>
+
+  <section id="prihlaska">
+    <div class="signup">
+      <h2>Momentálne je prihlasovanie zatvorené</h2>
+      <p>Nechaj nám e-mail a dáme ti vedieť ako prvej, keď otvoríme nový turnus. 
+        Žiadny spam, sľubujeme.</p>
+      <form action="#" onsubmit="return false">
+        <input type="email" placeholder="tvoj@email.sk" aria-label="E-mail" required>
+        <button type="submit">Chcem vedieť</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    Koncept C &middot; pastel gradient (fialová → ružová) &middot;
+    <a href="../index.html">hlavný návrh</a> &middot;
+    <a href="../alt-1/index.html">variant A &mdash; editorial</a> &middot;
+    <a href="../alt-2/index.html">variant B &mdash; dark premium</a>
+  </footer>
+
+</div>
+</body>
+</html>
