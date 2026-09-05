@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SockJS for Go III (yet another take) &middot; Written Slowly</title>
+  <meta name="description" content="It&amp;rsquo;s been a while since the last blog and this is the last in the series of &amp;ldquo;SockJS-go lessons learned&amp;rdquo;.">
+  <link rel="canonical" href="https://blog.igormihalik.com/post/sockjs-for-go-iii-yet-another-take/">
+  <link rel="alternate" type="application/rss+xml" title="Written Slowly" href="../../index.xml">
+  <link rel="stylesheet" href="../../css/page.css">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Written Slowly">
+  <meta property="og:url" content="https://blog.igormihalik.com/post/sockjs-for-go-iii-yet-another-take/">
+  <meta property="og:title" content="SockJS for Go III (yet another take)">
+  <meta property="article:published_time" content="2014-12-06T10:00:00Z">
+  <meta name="twitter:card" content="summary">
+  <script>
+  /* Applied before paint so the theme never flashes. */
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="shell">
+    <aside class="sidebar">
+      <div class="identity">
+        <a class="avatar" href="../../index.html" aria-label="Home">im</a>
+        <div>
+          <div class="identity-name">Igor Mihalik</div>
+          <div class="identity-host">blog.igormihalik.com</div>
+        </div>
+      </div>
+      <p class="sidebar-bio">Notes on Go, distributed systems, and the occasional detour.</p>
+      <nav aria-label="Main">
+        <p class="eyebrow">NAVIGATE</p>
+        <div class="nav-list">
+        <a href="../../index.html" aria-current="page"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18h-9a3 3 0 0 1-3-3V5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v13a3 3 0 0 0 3 3 3 3 0 0 0 3-3V8h-4"/><path d="M7 8h6M7 12h6M7 16h3"/></svg><span>Writing</span></a>
+        <a href="../../post/index.html"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9M10 13h4"/></svg><span>Archive</span></a>
+        <a href="../../post/index.html#topics"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 2.7a2 2 0 0 0-1.4-.6H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8 8a2 2 0 0 0 2.8 0l6.8-6.8a2 2 0 0 0 0-2.8z"/><circle cx="7" cy="7" r="1.2"/></svg><span>Topics</span></a>
+        <a href="https://github.com/igm" rel="me"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg><span>GitHub</span></a>
+        </div>
+      </nav>
+    </aside>
+    <div class="col">
+    <div class="mobilebar">
+      <a class="avatar" href="../../index.html" aria-label="Home">im</a>
+      <a class="title" href="../../index.html">Written Slowly</a>
+    </div>
+      <div class="topbar">
+        <div class="topbar-row">
+          <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">~</a><span class="sep">/</span><a href="../index.html">writing</a><span class="sep">/</span><span class="here">sockjs-for-go-iii-yet-another-take</span></nav>
+          <div class="topbar-actions"><a class="btn" href="../index.html"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> back</a><button class="btn" type="button" data-theme-toggle><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span data-theme-label>theme</span></button></div>
+        </div>
+        <div class="progress"><span></span></div>
+      </div>
+      <main id="main" class="article">
+        <article class="post article-inner">
+          <header class="post-header">
+            <div class="tag-cloud"><a class="tag" href="../../post/index.html#topics">go</a><a class="tag" href="../../post/index.html#topics">sockjs</a></div>
+            <h1>SockJS for Go III (yet another take)</h1>
+            <p class="post-meta">
+              <svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> <time datetime="2014-12-06">December 6, 2014</time>
+              <span class="sep">&middot;</span> <svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg> 3 min read
+            </p>
+          </header>
+          <hr class="rule">
+<p>It&rsquo;s been a while since the last blog and this is the last in the series of &ldquo;SockJS-go lessons learned&rdquo;.</p>
+<h2 id="version-v2">Version &ldquo;v2&rdquo;</h2>
+<p>&ldquo;v2&rdquo; is a compete rewrite of the SockJS-go library [1], the entire code base is much smaller thanks to using the full potential of Go&rsquo;s <a href="http://godoc.org/net/http" target="_blank">net/http</a> library. So no more http &ldquo;hijacks&rdquo; and number of go routines the library spawns internally is kept to minimum. The project also adopted versioning based on <a href="http://labix.org/gopkg.in" target="_blank">gopkg.in</a>. The main reason for gopkg.in adoption was that &ldquo;v2&rdquo; uses a different API compared to &ldquo;v1&rdquo;, which was for experimental purposes only. The aim of &ldquo;v2&rdquo; is to become more stable and eventually production ready library. To get the package execute:</p>
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre><code>$ go get gopkg.in/igm/sockjs-go.v2/sockjs
+</code></pre></div>
+<p>To import this package, add the following line to your code:</p>
+<div class="codeblock"><div class="codebar"><span class="lang">text</span><button class="copy" type="button"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>copy</span></button></div><pre><code>import &quot;gopkg.in/igm/sockjs-go.v2/sockjs&quot;
+</code></pre></div>
+<h2 id="data-frames">Data frames</h2>
+<p>SockJS was primarily created to enable applications running in older browsers to use WebSocket-like communication with server, or in other words provide <a href="https://github.com/sockjs/sockjs-node" target="_blank">WebSocket emulation</a> [2]. It provides a mechanism to send messages (or data frames) in both directions, from client to server and server to client. The only properly supported frames in SockJS are text frames. So in order to send binary data it is solely responsibility of an application to properly encode/decode binary message into text messages using UTF-8 encoding. Just to make the entire picture more complete, WebSockets as defined by RFC6455 support both types of data frames: <a href="http://tools.ietf.org/html/rfc6455#section-5.6" target="_blank">binary and text</a>.</p>
+<h2 id="api-changes">API Changes</h2>
+<p>As described above, SockJS (similar to WebSocket) uses data frames. A client initiates a connection to a server and creates a new sockjs session. Depending on the underlaying transport, the session can span over multiple connections. Thus the notion of sockjs session. This is reflected in the API by <a href="http://godoc.org/github.com/igm/sockjs-go/sockjs#Session" target="_blank">sockjs.Session</a> interface. Interface is simple enough to enable receiving and sending text frames, get the session ID and close the session.</p>
+<h2 id="sockjs-protocol-tests">SockJS Protocol Tests</h2>
+<p>This is probably the most questioned part of SockJS for Go implementation. Not all tests pass, and there&rsquo;s no plan to make them pass. However here is the list of tests that do not pass with some explanation:</p>
+<ul>
+<li><b>WebSocket tests</b> protocol tests use hixie-76 and hybi-10 draft implementations of WebSocket protocol. The latest RFC6544 is not covered. There are no plans to implement draft versions in Go (SockJS-go uses <a href="http://www.gorillatoolkit.org/pkg/websocket" target="_blank">Gorilla&rsquo;s WebSockets</a> implementation). This also means, that older browsers implementing draft versions will not use WebSocket but will fall back to another transport protocol</li>
+<li><b>JSONEncoding tests</b> use escaping of UTF surrogates to enable binary frames. As Go uses UTF-8 encoding internally for strings, it&rsquo;s advisable to use only valid characters in frames. Any binary encoding/decoding is responsibility of application layer and SockJS-go does not do any escaping.</li>
+<li><b>RawWebsocket tests</b> test raw WebSockets. SockJS-go test server registers handlers for raw WebSocket even if they don&rsquo;t pass (due to above mentioned WebSocket draft protocol reasons). If in your application you plan to use raw WebSockets you can, the net/http package is flexible enough to mix and match various handlers so you can use SockJS-go handler together with any other http handler including WebSocket handlers like <a href="http://godoc.org/code.google.com/p/go.net/websocket" target="_blank">this</a> or <a href="http://www.gorillatoolkit.org/pkg/websocket" target="_blank">this</a>.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Rewriting the SockJS-go library several times (9 or 10 times all together) was a perfect drill to learn Go more in deep. The latest version tries to be as simple as possible. It is also incredible to see the progress of Go since it was first introduced. The language is very much the same, but the libraries and runtime are improving at a fast pace with every release keeping the backward compatibility.</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://github.com/igm/sockjs-go" target="_blank">SockJS-go GitHub repository</a></li></li>
+<li><a href="https://github.com/sockjs/sockjs-node">SockJS-node</a> </li></li>
+</ol>
+        </article>
+      </main>
+    </div>
+    <aside class="rail">
+      <section>
+        <p class="rail-head eyebrow">ON THIS PAGE</p>
+        <nav class="toc"><a class="" href="#version-v2">Version “v2”</a><a class="" href="#data-frames">Data frames</a><a class="" href="#api-changes">API Changes</a><a class="" href="#sockjs-protocol-tests">SockJS Protocol Tests</a><a class="" href="#conclusion">Conclusion</a><a class="" href="#references">References</a></nav>
+      </section>
+      <section>
+        <p class="rail-head eyebrow">NEXT</p>
+        <div class="updown"><a href="../go-applications-and-cloud-foundry/index.html"><span class="dir"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg> NEWER<span class="when">2015.05.26</span></span><b>GO applications and Cloud Foundry</b></a><a href="../sockjs-for-go-ii-lessons-learned/index.html"><span class="dir"><svg class="i i-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg> OLDER<span class="when">2013.05.31</span></span><b>SockJS for Go II (lessons learned)</b></a></div>
+      </section>
+      <div class="sidebar-spacer"></div>
+      <section>
+        <p class="rail-head eyebrow">SHARE</p>
+        <div class="share"><a href="https://blog.igormihalik.com/post/sockjs-for-go-iii-yet-another-take/" title="Permalink"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></a><a href="https://x.com/intent/post?text=SockJS%20for%20Go%20III%20(yet%20another%20take)&amp;url=https://blog.igormihalik.com/post/sockjs-for-go-iii-yet-another-take/" title="Share on X"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 4.5 19.5 19.5M19.5 4.5 4.5 19.5"/></svg></a><a href="../../index.xml" title="RSS"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5"/></svg></a></div>
+      </section>
+    </aside>
+  </div>
+  <nav class="bottomnav" aria-label="Sections">
+      <div class="progress"><span></span></div>
+      <ul>
+        <li><a href="../../index.html" aria-current="page"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18h-9a3 3 0 0 1-3-3V5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v13a3 3 0 0 0 3 3 3 3 0 0 0 3-3V8h-4"/><path d="M7 8h6M7 12h6M7 16h3"/></svg><span>Writing</span></a></li>
+        <li><a href="../../post/index.html"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9M10 13h4"/></svg><span>Archive</span></a></li>
+        <li><a href="../../post/index.html#topics"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 2.7a2 2 0 0 0-1.4-.6H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8 8a2 2 0 0 0 2.8 0l6.8-6.8a2 2 0 0 0 0-2.8z"/><circle cx="7" cy="7" r="1.2"/></svg><span>Topics</span></a></li>
+        <li><a href="https://github.com/igm"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>About</span></a></li>
+      </ul>
+    </nav>
+  <script>
+  /* Copy-to-clipboard for code blocks. */
+  (function () {
+    [].forEach.call(document.querySelectorAll('.codebar .copy'), function (btn) {
+      btn.addEventListener('click', function () {
+        var pre = btn.closest('.codeblock').querySelector('pre');
+        navigator.clipboard.writeText(pre.innerText).then(function () {
+          btn.dataset.done = '1';
+          btn.querySelector('span').textContent = 'copied';
+          setTimeout(function () {
+            btn.dataset.done = '';
+            btn.querySelector('span').textContent = 'copy';
+          }, 1200);
+        });
+      });
+    });
+  })();
+  </script>
+  <script>
+  /* Vanilla lightbox: clicks on post images open a native <dialog>. */
+  (function () {
+    'use strict';
+    var post = document.querySelector('.post');
+    if (!post || !document.createElement('dialog').showModal) return;
+
+    var dlg = document.createElement('dialog');
+    dlg.className = 'lightbox';
+    dlg.setAttribute('aria-label', 'Image');
+    dlg.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close">&times;</button>';
+    var img = document.createElement('img');
+    img.alt = '';
+    dlg.insertBefore(img, dlg.firstChild);
+    document.body.appendChild(dlg);
+
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg || e.target.closest('.lightbox-close')) dlg.close();
+    });
+
+    post.addEventListener('click', function (e) {
+      var el = e.target;
+      if (el.tagName !== 'IMG') return;
+      var a = el.closest('a');
+      if (a && a.getAttribute('href') !== el.src) return;
+      e.preventDefault();
+      img.src = el.currentSrc || el.src;
+      img.alt = el.alt || '';
+      dlg.showModal();
+    });
+  })();
+  </script>
+<script>
+  /* Theme toggle — the only site-wide script. */
+  (function () {
+    var root = document.documentElement;
+    function current() {
+      return root.dataset.theme ||
+        (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    }
+    function label() {
+      var v = current();
+      [].forEach.call(document.querySelectorAll('[data-theme-label]'), function (el) { el.textContent = v; });
+    }
+    [].forEach.call(document.querySelectorAll('[data-theme-toggle]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        label();
+      });
+    });
+    label();
+  })();
+  </script>
+</body>
+</html>
